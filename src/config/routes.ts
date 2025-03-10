@@ -22,9 +22,9 @@ export const Routes = {
   // checkout: '/orders/checkout',
   // verifyEmail: '/verify-email',
   // verifyLicense: '/verify-license',
-  // user: {
-  //   ...routesFactory('/users'),
-  // },
+  user: {
+    ...routesFactory('/users'),
+  },
   // type: {
   //   ...routesFactory('/groups'),
   // },
@@ -72,6 +72,9 @@ export const Routes = {
   // },
   shop: {
     ...routesFactory('/shops'),
+  },
+  bookings: {
+    ...routesFactory('/bookings'),
   },
   roomCategories: {
     ...routesFactory('/room-categories'),
@@ -132,7 +135,7 @@ export const Routes = {
   // termsAndCondition: {
   //   ...routesFactory('/terms-and-conditions'),
   // },
-  // adminList: '/users/admins',
+  adminList: '/users/admins',
   // vendorList: '/users/vendors',
   // pendingVendorList: '/users/vendors/pending',
   // customerList: '/users/customer',

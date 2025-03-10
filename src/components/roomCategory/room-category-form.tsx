@@ -9,7 +9,7 @@ import ValidationError from "@/components/ui/form-validation-error";
 import { useTranslation } from "next-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { roomCategoryValidationSchema } from "./room-validation-schema";
-import { Room, RoomCategory } from "@/types";
+import { AttachmentInput, Room, RoomCategory } from "@/types";
 import { getErrorMessage } from "@/utils/form-error";
 import { Config } from "@/config";
 import StickyFooterPanel from "@/components/ui/sticky-footer-panel";
@@ -19,10 +19,12 @@ import {
 } from "@/data/room-category";
 import { formatSlug } from "@/utils/use-slug";
 import RichTextEditor from "@/components/ui/wysiwyg-editor/editor";
+import FileInput from "../ui/file-input";
 
 type FormValues = {
   name: string;
   slug: string;
+  image: AttachmentInput;
   description: string;
   capacity: number;
   price_per_night: number;
@@ -31,6 +33,7 @@ type FormValues = {
 const defaultValues = {
   name: "",
   slug: "",
+  image: '',
   description: "",
   capacity: 0,
   price_per_night: 0,
@@ -81,6 +84,11 @@ export default function CreateOrUpdateRoomCategoryForm({
     const input = {
       name: values.name,
       slug: slugAutoSuggest,
+      image: {
+        thumbnail: values?.image?.thumbnail,
+        original: values?.image?.original,
+        id: values?.image?.id,
+      },
       description: values.description,
       capacity: values.capacity,
       price_per_night: values.price_per_night,
@@ -110,7 +118,7 @@ export default function CreateOrUpdateRoomCategoryForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* <div className="flex flex-wrap pb-8 my-5 border-b border-dashed border-border-base sm:my-8">
+      <div className="flex flex-wrap pb-8 my-5 border-b border-dashed border-border-base sm:my-8">
         <Description
           title={t('form:input-label-image')}
           details={t('form:coupon-image-helper-text')}
@@ -120,7 +128,7 @@ export default function CreateOrUpdateRoomCategoryForm({
         <Card className="w-full sm:w-8/12 md:w-2/3">
           <FileInput name="image" control={control} multiple={false} />
         </Card>
-      </div> */}
+      </div>
 
       <div className="flex flex-wrap my-5 sm:my-8">
         <Description

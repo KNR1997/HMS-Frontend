@@ -16,10 +16,6 @@ const OrderStatusProgressBox = ({ paymentStatus, orderStatus }: Props) => {
     currentStatusIndex
   );
 
-  console.log('Order status: ', orderStatus)
-  console.log('filterStatus: ', filterStatus)
-  console.log('currentStatusIndex: ', currentStatusIndex)
-
   return (
     <ProgressBox
       data={filterStatus}

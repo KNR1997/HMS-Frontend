@@ -80,6 +80,7 @@
   "input-label-coupons": "Coupons",
   "input-label-orders": "Orders",
   "input-label-order-id": "Order ID",
+  "input-label-booking-number": "Booking No.",
   "input-label-sku": "SKU",
   "input-note-multilang-sku": "Make sure SKU is identical for all languages.",
   "input-label-name": "Name",

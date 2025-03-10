@@ -7,20 +7,20 @@ import StatusColor from '@/components/order/status-color';
 import Badge from '@/components/ui/badge/badge';
 
 interface OrderViewHeaderProps {
-  order: any;
+  booking: any;
   wrapperClassName?: string;
   buttonSize?: 'big' | 'medium' | 'small';
 }
 
 export default function OrderViewHeader({
-  order,
+  booking,
   wrapperClassName = 'px-11 py-5',
   buttonSize = 'medium',
 }: OrderViewHeaderProps) {
   const { t } = useTranslation('common');
-  const isPaymentCOD = [PaymentGateway.COD, PaymentGateway.CASH].includes(order?.payment_gateway);
-  const isOrderPending = ![OrderStatus.CANCELLED, OrderStatus.FAILED].includes(order?.order_status);
-  const isPaymentActionPending = !isPaymentCOD && isOrderPending && order?.payment_status !== PaymentStatus.SUCCESS;
+  const isPaymentCOD = [PaymentGateway.COD, PaymentGateway.CASH].includes(booking?.payment_gateway);
+  const isOrderPending = ![OrderStatus.CANCELLED, OrderStatus.FAILED].includes(booking?.order_status);
+  const isPaymentActionPending = !isPaymentCOD && isOrderPending && booking?.payment_status !== PaymentStatus.SUCCESS;
 
   return (
     <div className={cn(`bg-[#F7F8FA] ${wrapperClassName}`)}>
@@ -37,8 +37,8 @@ export default function OrderViewHeader({
               {t('text-order-status')} :
             </span>
             <Badge
-              text={t(order?.order_status)}
-              color={StatusColor(order?.order_status)}
+              text={t(booking?.status)}
+              color={StatusColor(booking?.order_status)}
             />
           </div>
           <div>
@@ -46,8 +46,8 @@ export default function OrderViewHeader({
               {t('text-payment-status')} :
             </span>
             <Badge
-              text={t(order?.payment_status)}
-              color={StatusColor(order?.payment_status)}
+              text={t(booking?.payment_status)}
+              color={StatusColor(booking?.payment_status)}
             />
           </div>
         </div>

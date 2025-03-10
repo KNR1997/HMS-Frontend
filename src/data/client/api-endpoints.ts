@@ -12,6 +12,8 @@ export const API_ENDPOINTS = {
   PRODUCTS_v2: 'products_v2',
   POPULAR_PRODUCTS: 'popular-products',
   COUPONS: 'coupons',
+  BOOKINGS: 'bookings',
+  BOOKING_ITEMS: 'booking-items',
   ROOMS: 'rooms',
   ROOM_CATEGORIES: 'room-categories',
   VERIFY_COUPONS: 'coupons/verify',
