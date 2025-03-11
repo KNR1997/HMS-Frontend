@@ -180,10 +180,11 @@ const UserList = ({
             {data?.id != id && (
               <ActionButtons
                 id={id}
+                editUrl='/users/edit'
                 userStatus={true}
                 isUserActive={is_active}
-                showAddWalletPoints={true}
-                showMakeAdminButton={true}
+                // showAddWalletPoints={true}
+                // showMakeAdminButton={true}
               />
             )}
           </>

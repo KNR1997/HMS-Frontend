@@ -90,20 +90,20 @@ const AdminsList = ({
         />
       ),
       className: 'cursor-pointer',
-      dataIndex: 'name',
-      key: 'name',
+      dataIndex: 'username',
+      key: 'username',
       align: alignLeft,
       width: 250,
       ellipsis: true,
-      onHeaderCell: () => onHeaderClick('name'),
+      onHeaderCell: () => onHeaderClick('username'),
       render: (
-        name: string,
+        username: string,
         { profile, email }: { profile: any; email: string }
       ) => (
         <div className="flex items-center">
-          <Avatar name={name} src={profile?.avatar?.thumbnail} />
+          <Avatar name={username} src={profile?.avatar?.thumbnail} />
           <div className="flex flex-col whitespace-nowrap font-medium ms-2">
-            {name}
+            {username}
             <span className="text-[13px] font-normal text-gray-500/80">
               {email}
             </span>
@@ -134,13 +134,13 @@ const AdminsList = ({
         );
       },
     },
-    {
-      title: t('table:table-item-available_wallet_points'),
-      dataIndex: ['wallet', 'available_points'],
-      key: 'available_wallet_points',
-      align: 'center',
-      width: 150,
-    },
+    // {
+    //   title: t('table:table-item-available_wallet_points'),
+    //   dataIndex: ['wallet', 'available_points'],
+    //   key: 'available_wallet_points',
+    //   align: 'center',
+    //   width: 150,
+    // },
     {
       title: (
         <TitleWithSort

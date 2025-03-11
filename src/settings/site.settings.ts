@@ -436,9 +436,21 @@ export const siteSettings = {
         icon: 'SettingsIcon',
         childMenu: [
           {
-            href: Routes.user.list,
+            href: '',
             label: 'text-all-users',
             icon: 'UsersIcon',
+            childMenu: [
+              {
+                href: Routes.user.list,
+                label: 'text-all-users',
+                icon: 'UsersIcon',
+              },
+              {
+                href: Routes.user.create,
+                label: 'text-pending-vendors',
+                icon: 'UsersIcon',
+              },
+            ],
           },
           {
             href: Routes.adminList,
