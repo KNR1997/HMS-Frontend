@@ -106,6 +106,53 @@ export const siteSettings = {
       //   ],
       // },
 
+      booking: {
+        href: '',
+        label: 'text-booking-management',
+        icon: 'OrdersIcon',
+        childMenu: [
+            {
+              href: '',
+              label: 'sidebar-nav-item-bookings',
+              icon: 'OrdersIcon',
+              childMenu: [
+                {
+                  href: Routes.bookings.list,
+                  label: 'All bookings',
+                  icon: 'OrdersIcon',
+                },
+                {
+                  href: Routes.bookings.create,
+                  label: 'Create booking',
+                  icon: 'OrdersIcon',
+                },
+                // {
+                //   href: Routes.roomCategories.create,
+                //   label: 'Add new room category',
+                //   icon: 'ShopIcon',
+                // },
+              ],
+            },
+          // {
+          //   href: '',
+          //   label: 'sidebar-nav-item-rooms',
+          //   icon: 'ShopIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.room.list,
+          //       label: 'text-all-rooms',
+          //       icon: 'MyShopIcon',
+          //     },
+          //     {
+          //       href: Routes.room.create,
+          //       label: 'text-add-all-rooms',
+          //       icon: 'ShopIcon',
+          //     },
+          //   ],
+          // },
+        ],
+      },
+
       room: {
         href: '',
         label: 'text-room-management',
@@ -118,12 +165,12 @@ export const siteSettings = {
               childMenu: [
                 {
                   href: Routes.roomCategories.list,
-                  label: 'text-all-rooms',
+                  label: 'All room categories',
                   icon: 'MyShopIcon',
                 },
                 {
                   href: Routes.roomCategories.create,
-                  label: 'text-add-all-rooms',
+                  label: 'Add new room category',
                   icon: 'ShopIcon',
                 },
               ],
@@ -303,52 +350,52 @@ export const siteSettings = {
       //   ],
       // },
 
-      // layout: {
-      //   href: '',
-      //   label: 'text-page-control',
-      //   icon: 'SettingsIcon',
-      //   childMenu: [
-      //     {
-      //       href: Routes.type.list,
-      //       label: 'text-groups',
-      //       icon: 'HomeIcon',
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'text-faqs',
-      //       icon: 'FaqIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.faqs.list,
-      //           label: 'text-all-faqs',
-      //           icon: 'FaqIcon',
-      //         },
-      //         {
-      //           href: Routes.faqs.create,
-      //           label: 'text-new-faq',
-      //           icon: 'TypesIcon',
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'text-terms-conditions',
-      //       icon: 'TermsIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.termsAndCondition.list,
-      //           label: 'text-all-terms',
-      //           icon: 'TermsIcon',
-      //         },
-      //         {
-      //           href: Routes.termsAndCondition.create,
-      //           label: 'text-new-terms',
-      //           icon: 'TermsIcon',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // },
+      layout: {
+        href: '',
+        label: 'text-page-control',
+        icon: 'SettingsIcon',
+        childMenu: [
+          // {
+          //   href: Routes.type.list,
+          //   label: 'text-groups',
+          //   icon: 'HomeIcon',
+          // },
+          {
+            href: '',
+            label: 'text-faqs',
+            icon: 'FaqIcon',
+            childMenu: [
+              {
+                href: Routes.faqs.list,
+                label: 'text-all-faqs',
+                icon: 'FaqIcon',
+              },
+              {
+                href: Routes.faqs.create,
+                label: 'text-new-faq',
+                icon: 'TypesIcon',
+              },
+            ],
+          },
+          // {
+          //   href: '',
+          //   label: 'text-terms-conditions',
+          //   icon: 'TermsIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.termsAndCondition.list,
+          //       label: 'text-all-terms',
+          //       icon: 'TermsIcon',
+          //     },
+          //     {
+          //       href: Routes.termsAndCondition.create,
+          //       label: 'text-new-terms',
+          //       icon: 'TermsIcon',
+          //     },
+          //   ],
+          // },
+        ],
+      },
 
       // order: {
       //   href: Routes.order.list,
@@ -388,62 +435,74 @@ export const siteSettings = {
       //   ],
       // },
 
-      // user: {
-      //   href: '',
-      //   label: 'text-user-control',
-      //   icon: 'SettingsIcon',
-      //   childMenu: [
-      //     {
-      //       href: Routes.user.list,
-      //       label: 'text-all-users',
-      //       icon: 'UsersIcon',
-      //     },
-      //     {
-      //       href: Routes.adminList,
-      //       label: 'text-admin-list',
-      //       icon: 'AdminListIcon',
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'text-vendors',
-      //       icon: 'VendorsIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.vendorList,
-      //           label: 'text-all-vendors',
-      //           icon: 'UsersIcon',
-      //         },
-      //         {
-      //           href: Routes.pendingVendorList,
-      //           label: 'text-pending-vendors',
-      //           icon: 'UsersIcon',
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'sidebar-nav-item-staffs',
-      //       icon: 'StaffIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.myStaffs,
-      //           label: 'sidebar-nav-item-my-staffs',
-      //           icon: 'UsersIcon',
-      //         },
-      //         {
-      //           href: Routes.vendorStaffs,
-      //           label: 'sidebar-nav-item-vendor-staffs',
-      //           icon: 'UsersIcon',
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       href: Routes.customerList,
-      //       label: 'text-customers',
-      //       icon: 'CustomersIcon',
-      //     },
-      //   ],
-      // },
+      user: {
+        href: '',
+        label: 'text-user-control',
+        icon: 'SettingsIcon',
+        childMenu: [
+          {
+            href: '',
+            label: 'text-all-users',
+            icon: 'UsersIcon',
+            childMenu: [
+              {
+                href: Routes.user.list,
+                label: 'text-all-users',
+                icon: 'UsersIcon',
+              },
+              {
+                href: Routes.user.create,
+                label: 'text-pending-vendors',
+                icon: 'UsersIcon',
+              },
+            ],
+          },
+          {
+            href: Routes.adminList,
+            label: 'text-admin-list',
+            icon: 'AdminListIcon',
+          },
+          // {
+          //   href: '',
+          //   label: 'text-vendors',
+          //   icon: 'VendorsIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.vendorList,
+          //       label: 'text-all-vendors',
+          //       icon: 'UsersIcon',
+          //     },
+          //     {
+          //       href: Routes.pendingVendorList,
+          //       label: 'text-pending-vendors',
+          //       icon: 'UsersIcon',
+          //     },
+          //   ],
+          // },
+          // {
+          //   href: '',
+          //   label: 'sidebar-nav-item-staffs',
+          //   icon: 'StaffIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.myStaffs,
+          //       label: 'sidebar-nav-item-my-staffs',
+          //       icon: 'UsersIcon',
+          //     },
+          //     {
+          //       href: Routes.vendorStaffs,
+          //       label: 'sidebar-nav-item-vendor-staffs',
+          //       icon: 'UsersIcon',
+          //     },
+          //   ],
+          // },
+          // {
+          //   href: Routes.customerList,
+          //   label: 'text-customers',
+          //   icon: 'CustomersIcon',
+          // },
+        ],
+      },
 
       // feedback: {
       //   href: '',

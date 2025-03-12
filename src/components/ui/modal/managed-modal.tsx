@@ -3,6 +3,12 @@ import Modal from '@/components/ui/modal/modal';
 import dynamic from 'next/dynamic';
 import { MODAL_VIEWS, useModalAction, useModalState } from './modal.context';
 
+const BookingDeleteView = dynamic(
+  () => import('@/components/booking/booking-delete-view'),
+);
+const BookingItemDeleteView = dynamic(
+  () => import('@/components/booking-item/booking-item-delete-view'),
+);
 const RoomCategoryDeleteView = dynamic(
   () => import('@/components/roomCategory/room-category-delete-view'),
 );
@@ -175,6 +181,10 @@ function renderModal(view: MODAL_VIEWS | undefined, data: any) {
       return <CouponDeleteView />;
     case 'DELETE_ROOM':
       return <RoomDeleteView />;
+    case 'DELETE_BOOKING':
+      return <BookingDeleteView />;
+    case 'DELETE_BOOKING_ITEM':
+      return <BookingItemDeleteView />;
     case 'DELETE_ROOM_CATEGORY':
       return <RoomCategoryDeleteView />;
     case 'DELETE_TAX':

@@ -11,11 +11,15 @@ import { useUI } from '@/contexts/ui.context';
 import { Routes } from '@/config/routes';
 import usePrice from '@/utils/use-price';
 import { useCart } from '@/contexts/quick-cart/cart.context';
+import { useBooking } from '@/contexts/quick-booking/booking.context';
+import BookingItem from './add-room/item';
 // import { drawerAtom } from '@store/drawer-atom';
 
 const Cart = () => {
   const { t } = useTranslation('common');
-  const { items, totalUniqueItems, total } = useCart();
+  // const { items, totalUniqueItems, total } = useCart();
+  const { rooms, total } = useBooking();
+
   const { closeCartSidebar } = useUI();
 
   // const [_, closeSidebar] = useAtom(drawerAtom);
@@ -24,7 +28,7 @@ const Cart = () => {
   function handleCheckout() {
     // const regularCheckout = items.find((item) => item.is_digital === false);
     // if (regularCheckout) {
-    router.push(Routes.checkout);
+    router.push(Routes.bookingCheckout);
     // } else {
     // router.push(ROUTES.CHECKOUT_DIGITAL);
     // }
@@ -40,9 +44,9 @@ const Cart = () => {
       <header className="fixed top-0 z-10 flex h-16 w-full max-w-md items-center justify-between border-b border-border-200 border-opacity-75 bg-light px-6">
         <div className="flex font-semibold text-accent">
           <CartCheckBagIcon className="flex-shrink-0" width={24} height={22} />
-          <span className="flex ms-2">
+          {/* <span className="flex ms-2">
             {formatString(totalUniqueItems, t('text-item'))}
-          </span>
+          </span> */}
         </div>
         <button
           onClick={closeCartSidebar}
@@ -55,8 +59,8 @@ const Cart = () => {
       {/* End of cart header */}
 
       <motion.div layout className="flex-grow pb-20">
-        {items.length > 0 ? (
-          items?.map((item) => <CartItem item={item} key={item.id} />)
+        {rooms.length > 0 ? (
+          rooms?.map((room) => <BookingItem room={room} key={room.id} />)
         ) : (
           <motion.div
             layout

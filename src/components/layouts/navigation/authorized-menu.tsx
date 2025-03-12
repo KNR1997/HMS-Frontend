@@ -1,21 +1,21 @@
-import cn from 'classnames';
-import { Fragment } from 'react';
-import { Menu, Transition } from '@headlessui/react';
-import Avatar from '@/components/common/avatar';
-import Link from '@/components/ui/link';
-import { siteSettings } from '@/settings/site.settings';
-import { useTranslation } from 'next-i18next';
-import { useMeQuery } from '@/data/user';
-import { getIcon } from '@/utils/get-icon';
-import * as sidebarIcons from '@/components/icons/sidebar';
-import { useRouter } from 'next/router';
-import { getAuthCredentials, hasAccess } from '@/utils/auth-utils';
+import cn from "classnames";
+import { Fragment } from "react";
+import { Menu, Transition } from "@headlessui/react";
+import Avatar from "@/components/common/avatar";
+import Link from "@/components/ui/link";
+import { siteSettings } from "@/settings/site.settings";
+import { useTranslation } from "next-i18next";
+import { useMeQuery } from "@/data/user";
+import { getIcon } from "@/utils/get-icon";
+import * as sidebarIcons from "@/components/icons/sidebar";
+import { useRouter } from "next/router";
+import { getAuthCredentials, hasAccess } from "@/utils/auth-utils";
 
 export default function AuthorizedMenu() {
   const { data } = useMeQuery();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   const { pathname, query } = useRouter();
-  const slug = (pathname === '/[shop]' && query?.shop) || '';
+  const slug = (pathname === "/[shop]" && query?.shop) || "";
   const { role, permissions } = getAuthCredentials();
 
   // Again, we're using framer-motion for the transition effect
@@ -36,10 +36,10 @@ export default function AuthorizedMenu() {
         />
         <div className="hidden w-[calc(100%-48px)] flex-col items-start space-y-0.5 truncate text-sm ltr:text-left rtl:text-right xl:flex">
           <span className="w-full truncate font-semibold capitalize text-black">
-            {data?.name}
+            {data?.username}
           </span>
           <span className="w-full truncate text-xs capitalize text-gray-400">
-            {role ? role.split('_').join(' ') : data?.email}
+            {role ? role.split("_").join(" ") : data?.email}
           </span>
         </div>
       </Menu.Button>
@@ -70,7 +70,7 @@ export default function AuthorizedMenu() {
                 />
                 <div className="flex w-[calc(100%-40px)] flex-col items-start space-y-0.5 text-sm">
                   <span className="w-full truncate font-semibold capitalize text-black">
-                    {data?.name}
+                    {data?.username}
                   </span>
                   <span className="break-all text-xs text-gray-400">
                     {data?.email}
@@ -91,23 +91,23 @@ export default function AuthorizedMenu() {
                           <>
                             <li
                               className={cn(
-                                'cursor-pointer border-dashed border-gray-200 px-2 last:!mt-2.5 last:border-t last:pt-2'
+                                "cursor-pointer border-dashed border-gray-200 px-2 last:!mt-2.5 last:border-t last:pt-2"
                               )}
                             >
                               <Link
                                 href={href}
                                 className={cn(
-                                  'group flex items-center gap-2 rounded-md py-2.5 px-3 text-sm capitalize transition duration-200 hover:text-accent',
+                                  "group flex items-center gap-2 rounded-md py-2.5 px-3 text-sm capitalize transition duration-200 hover:text-accent",
                                   active
-                                    ? 'border-transparent bg-gray-100 text-accent'
-                                    : 'text-heading'
+                                    ? "border-transparent bg-gray-100 text-accent"
+                                    : "text-heading"
                                 )}
                               >
                                 <span className="text-gray-600 group-hover:text-accent">
                                   {getIcon({
                                     iconList: sidebarIcons,
                                     iconName: icon,
-                                    className: 'w-5 h-5',
+                                    className: "w-5 h-5",
                                   })}
                                 </span>
                                 {t(labelTransKey)}

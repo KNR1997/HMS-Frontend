@@ -73,6 +73,7 @@ interface SearchParamOptions {
   product_type: string;
   is_read: boolean;
   room_number: string;
+  user: string;
 }
 
 export class HttpClient {

@@ -426,6 +426,7 @@ export interface MakeAdminInput {
 
 export interface User {
   id: string;
+  username: string;
   name: string;
   shops: Shop[];
   managed_shop: Shop;
@@ -481,12 +482,28 @@ export interface Address {
   location: GoogleMapLocation;
 }
 
+export interface Booking {
+  id: string,
+  booking_number: string;
+  user: string,
+  check_in: string,
+  check_out: string,
+  total_price: string,
+  status: string,
+  rooms: Room[],
+}
+
+export interface BookingItem {
+  id: string,
+}
+
 export interface Room {
   id: string,
   hotel_id: string,
   category: string,
   room_number: string,
   is_available: boolean,
+  price: string,
 }
 
 export interface RoomCategory {
@@ -540,6 +557,11 @@ export interface RoomInput {
   category_id: string;
   room_number: string;
   is_available: boolean;
+}
+
+export interface BookingInput {
+  booking_number: string;
+  status: string;
 }
 
 export interface StoreNotice {
@@ -1893,6 +1915,11 @@ export interface RoomQueryOptions extends QueryOptions {
   room_number: string;
 }
 
+export interface BookingQueryOptions extends QueryOptions {
+  user: string;
+  booking_number: string;
+}
+
 export interface StoreNoticeQueryOptions extends QueryOptions {
   notice: string;
   shops: string;
@@ -1993,6 +2020,8 @@ export interface NotifyLogsPaginator extends PaginatorInfo<NotifyLogs> {}
 export interface CouponPaginator extends PaginatorInfo<Coupon> {}
 
 export interface RoomPaginator extends PaginatorInfo<Room> {}
+
+export interface BookingPaginator extends PaginatorInfo<Booking> {}
 
 export interface RoomCategoryPaginator extends PaginatorInfo<RoomCategory> {}
 

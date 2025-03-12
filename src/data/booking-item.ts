@@ -3,24 +3,25 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'next-i18next';
 import { mapPaginatorData } from '@/utils/data-mappers';
-import { CouponQueryOptions, Room, RoomPaginator } from '@/types';
+import { Booking, BookingPaginator, BookingQueryOptions, CouponQueryOptions, Room } from '@/types';
 import { Routes } from '@/config/routes';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { Config } from '@/config';
-import { roomClient } from './client/rooms';
+import { bookingClient } from './client/booking';
+import { bookingItemClient } from './client/booking-item';
 
-export const useRoomsQuery = (options: Partial<CouponQueryOptions>) => {
-  const { data, error, isLoading } = useQuery<RoomPaginator, Error>(
-    [API_ENDPOINTS.ROOMS, options],
+export const useBookingsQuery = (options: Partial<BookingQueryOptions>) => {
+  const { data, error, isLoading } = useQuery<BookingPaginator, Error>(
+    [API_ENDPOINTS.BOOKINGS, options],
     ({ queryKey, pageParam }) =>
-      roomClient.paginated(Object.assign({}, queryKey[1], pageParam)),
+      bookingClient.paginated(Object.assign({}, queryKey[1], pageParam)),
     {
       keepPreviousData: true,
     },
   );
 
   return {
-    rooms: data?.data ?? [],
+    bookings: data?.data ?? [],
     paginatorInfo: mapPaginatorData(data),
     error,
     loading: isLoading,
@@ -32,7 +33,7 @@ export const useCreateRoomMutation = () => {
   const { t } = useTranslation();
   const router = useRouter();
 
-  return useMutation(roomClient.createWithEndpoint, {
+  return useMutation(bookingClient.createWithEndpoint, {
     onSuccess: async () => {
       const generateRedirectUrl = router.query.shop
         ? `/${router.query.shop}${Routes.room.list}`
@@ -52,61 +53,71 @@ export const useCreateRoomMutation = () => {
   });
 };
 
-export const useDeleteRoomMutation = () => {
+export const useDeleteBookingItemMutation = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
+  const router = useRouter();
 
-  return useMutation(roomClient.deleteWithEndpoint, {
-    onSuccess: () => {
+  return useMutation(bookingItemClient.deleteWithEndpoint, {
+    onSuccess: async () => {
+      const generateRedirectUrl = router.query.shop
+      ? `/${router.query.shop}${Routes.bookings.list}`
+      : Routes.bookings.list;
+    await Router.push(generateRedirectUrl, undefined, {
+      locale: Config.defaultLanguage,
+    });
       toast.success(t('common:successfully-deleted'));
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.ROOMS);
+      queryClient.invalidateQueries(API_ENDPOINTS.BOOKINGS);
     },
   });
 };
 
-export const useUpdateRoomMutation = () => {
+export const useUpdateBookingMutation = () => {
   const { t } = useTranslation();
   const queryClient = useQueryClient();
   const router = useRouter();
-  return useMutation(roomClient.updateWithEndpoint, {
+  return useMutation(bookingClient.updateWithEndpoint, {
     onSuccess: async (data) => {
       const generateRedirectUrl = router.query.shop
-        ? `/${router.query.shop}${Routes.room.list}`
-        : Routes.room.list;
+        ? `/${router.query.shop}${Routes.bookings.list}`
+        : Routes.bookings.list;
       await router.push(generateRedirectUrl, undefined, {
         locale: Config.defaultLanguage,
       });
 
-      toast.error(t('common:successfully-updated'));
+      toast.success(t('common:successfully-updated'));
     },
     // Always refetch after error or success:
     onSettled: () => {
-      queryClient.invalidateQueries(API_ENDPOINTS.ROOMS);
+      queryClient.invalidateQueries(API_ENDPOINTS.BOOKINGS);
     },
     onError: (error: any) => {
-      toast.error(t(`common:${error?.response?.data.message}`));
+      toast.error(error?.response?.data.error);
     },
   });
 };
 
-export const useRoomQuery = ({
-  room_number,
+export const useBookingQuery = ({
+  booking_number,
   language,
 }: {
-  room_number: string;
+  booking_number: string;
   language: string;
 }) => {
-  const { data, error, isLoading } = useQuery<Room, Error>(
-    [API_ENDPOINTS.ROOMS, { room_number, language }],
-    () => roomClient.get({ room_number, language }),
+  const { data, error, isLoading } = useQuery<Booking, Error>(
+    [API_ENDPOINTS.BOOKINGS, { booking_number, language }],
+    () => bookingClient.get({ booking_number, language }),
+    {
+      enabled: Boolean(booking_number),
+    }
   );
 
   return {
-    room: data,
+    booking: data,
     error,
-    loading: isLoading,
+    isLoading,
   };
 };
