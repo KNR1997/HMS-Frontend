@@ -1,25 +1,26 @@
-import type { AppProps } from 'next/app';
-import 'react-toastify/dist/ReactToastify.css';
-import '@/assets/css/main.css';
-import { UIProvider } from '@/contexts/ui.context';
-import { SettingsProvider } from '@/contexts/settings.context';
-import ErrorMessage from '@/components/ui/error-message';
-import PageLoader from '@/components/ui/page-loader/page-loader';
-import { ToastContainer } from 'react-toastify';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { Hydrate } from 'react-query/hydration';
-import { useSettingsQuery } from '@/data/settings';
-import { ReactQueryDevtools } from 'react-query/devtools';
-import { appWithTranslation } from 'next-i18next';
-import { ModalProvider } from '@/components/ui/modal/modal.context';
-import DefaultSeo from '@/components/ui/default-seo';
-import ManagedModal from '@/components/ui/modal/managed-modal';
-import { CartProvider } from '@/contexts/quick-cart/cart.context';
-import { useState } from 'react';
-import type { NextPageWithLayout } from '@/types';
-import { useRouter } from 'next/router';
-import PrivateRoute from '@/utils/private-route';
-import { Config } from '@/config';
+import type { AppProps } from "next/app";
+import "react-toastify/dist/ReactToastify.css";
+import "@/assets/css/main.css";
+import { UIProvider } from "@/contexts/ui.context";
+import { SettingsProvider } from "@/contexts/settings.context";
+import ErrorMessage from "@/components/ui/error-message";
+import PageLoader from "@/components/ui/page-loader/page-loader";
+import { ToastContainer } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate } from "react-query/hydration";
+import { useSettingsQuery } from "@/data/settings";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { appWithTranslation } from "next-i18next";
+import { ModalProvider } from "@/components/ui/modal/modal.context";
+import DefaultSeo from "@/components/ui/default-seo";
+import ManagedModal from "@/components/ui/modal/managed-modal";
+import { CartProvider } from "@/contexts/quick-cart/cart.context";
+import { useState } from "react";
+import type { NextPageWithLayout } from "@/types";
+import { useRouter } from "next/router";
+import PrivateRoute from "@/utils/private-route";
+import { Config } from "@/config";
+import { BookingProvider } from "@/contexts/quick-booking/booking.context";
 const Noop: React.FC<{ children?: React.ReactNode }> = ({ children }) => (
   <>{children}</>
 );
@@ -53,20 +54,22 @@ const CustomApp = ({ Component, pageProps }: AppPropsWithLayout) => {
               <ModalProvider>
                 <>
                   <CartProvider>
-                    <DefaultSeo />
-                    {authProps ? (
-                      <PrivateRoute authProps={authProps}>
+                    <BookingProvider>
+                      <DefaultSeo />
+                      {authProps ? (
+                        <PrivateRoute authProps={authProps}>
+                          <Layout {...pageProps}>
+                            <Component {...pageProps} />
+                          </Layout>
+                        </PrivateRoute>
+                      ) : (
                         <Layout {...pageProps}>
                           <Component {...pageProps} />
                         </Layout>
-                      </PrivateRoute>
-                    ) : (
-                      <Layout {...pageProps}>
-                        <Component {...pageProps} />
-                      </Layout>
-                    )}
-                    <ToastContainer autoClose={2000} theme="colored" />
-                    <ManagedModal />
+                      )}
+                      <ToastContainer autoClose={2000} theme="colored" />
+                      <ManagedModal />
+                    </BookingProvider>
                   </CartProvider>
                 </>
               </ModalProvider>

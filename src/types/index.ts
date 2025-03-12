@@ -426,6 +426,7 @@ export interface MakeAdminInput {
 
 export interface User {
   id: string;
+  username: string;
   name: string;
   shops: Shop[];
   managed_shop: Shop;
@@ -502,6 +503,7 @@ export interface Room {
   category: string,
   room_number: string,
   is_available: boolean,
+  price: string,
 }
 
 export interface RoomCategory {

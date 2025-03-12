@@ -26,4 +26,7 @@ export const bookingClient = {
       search: HttpClient.formatSearchParams({ user }),
     });
   },
+  processBooking: (data: BookingInput) => {
+    return HttpClient.post(`admin/process-booking`, data)
+  }
 };

@@ -121,6 +121,11 @@ export const siteSettings = {
                   label: 'All bookings',
                   icon: 'OrdersIcon',
                 },
+                {
+                  href: Routes.bookings.create,
+                  label: 'Create booking',
+                  icon: 'OrdersIcon',
+                },
                 // {
                 //   href: Routes.roomCategories.create,
                 //   label: 'Add new room category',
@@ -345,52 +350,52 @@ export const siteSettings = {
       //   ],
       // },
 
-      // layout: {
-      //   href: '',
-      //   label: 'text-page-control',
-      //   icon: 'SettingsIcon',
-      //   childMenu: [
-      //     {
-      //       href: Routes.type.list,
-      //       label: 'text-groups',
-      //       icon: 'HomeIcon',
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'text-faqs',
-      //       icon: 'FaqIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.faqs.list,
-      //           label: 'text-all-faqs',
-      //           icon: 'FaqIcon',
-      //         },
-      //         {
-      //           href: Routes.faqs.create,
-      //           label: 'text-new-faq',
-      //           icon: 'TypesIcon',
-      //         },
-      //       ],
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'text-terms-conditions',
-      //       icon: 'TermsIcon',
-      //       childMenu: [
-      //         {
-      //           href: Routes.termsAndCondition.list,
-      //           label: 'text-all-terms',
-      //           icon: 'TermsIcon',
-      //         },
-      //         {
-      //           href: Routes.termsAndCondition.create,
-      //           label: 'text-new-terms',
-      //           icon: 'TermsIcon',
-      //         },
-      //       ],
-      //     },
-      //   ],
-      // },
+      layout: {
+        href: '',
+        label: 'text-page-control',
+        icon: 'SettingsIcon',
+        childMenu: [
+          // {
+          //   href: Routes.type.list,
+          //   label: 'text-groups',
+          //   icon: 'HomeIcon',
+          // },
+          {
+            href: '',
+            label: 'text-faqs',
+            icon: 'FaqIcon',
+            childMenu: [
+              {
+                href: Routes.faqs.list,
+                label: 'text-all-faqs',
+                icon: 'FaqIcon',
+              },
+              {
+                href: Routes.faqs.create,
+                label: 'text-new-faq',
+                icon: 'TypesIcon',
+              },
+            ],
+          },
+          // {
+          //   href: '',
+          //   label: 'text-terms-conditions',
+          //   icon: 'TermsIcon',
+          //   childMenu: [
+          //     {
+          //       href: Routes.termsAndCondition.list,
+          //       label: 'text-all-terms',
+          //       icon: 'TermsIcon',
+          //     },
+          //     {
+          //       href: Routes.termsAndCondition.create,
+          //       label: 'text-new-terms',
+          //       icon: 'TermsIcon',
+          //     },
+          //   ],
+          // },
+        ],
+      },
 
       // order: {
       //   href: Routes.order.list,

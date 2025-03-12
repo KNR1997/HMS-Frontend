@@ -52,6 +52,31 @@ export const useCreateRoomMutation = () => {
   });
 };
 
+export const useCreateBookingMutation = () => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+  const router = useRouter();
+
+  return useMutation(bookingClient.processBooking, {
+    onSuccess: async () => {
+      const generateRedirectUrl = router.query.shop
+        ? `/${router.query.shop}${Routes.room.list}`
+        : Routes.bookings.list;
+      await Router.push(generateRedirectUrl, undefined, {
+        locale: Config.defaultLanguage,
+      });
+      toast.success(t('common:successfully-created'));
+    },
+    onError: (error: any) => {
+      toast.error(t(`common:${error?.response?.data.message}`));
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.ROOMS);
+    },
+  });
+};
+
 export const useDeleteBookingMutation = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();

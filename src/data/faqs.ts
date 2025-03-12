@@ -104,7 +104,7 @@ export const useCreateFaqsMutation = () => {
   const router = useRouter();
   const { t } = useTranslation();
 
-  return useMutation(faqsClient.create, {
+  return useMutation(faqsClient.createWithEndpoint, {
     onSuccess: async () => {
       const generateRedirectUrl = router.query.shop
         ? `/${router.query.shop}${Routes.faqs.list}`
@@ -119,7 +119,7 @@ export const useCreateFaqsMutation = () => {
       queryClient.invalidateQueries(API_ENDPOINTS.FAQS);
     },
     onError: (error: any) => {
-      toast.error(t(`common:${error?.response?.data.message}`));
+      toast.error(error?.response?.data.error);
     },
   });
 };

@@ -86,8 +86,6 @@ export default function OrderDetailsPage() {
     isLoading: deleteBookingItemLoading,
   } = useDeleteBookingItemMutation();
 
-  console.log("booking details: ", booking);
-
   const { refetch } = useDownloadInvoiceMutation(
     {
       order_id: query.orderId as string,

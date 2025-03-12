@@ -8,7 +8,7 @@ export const Routes = {
   // adminMyShops: '/my-shops',
   // profile: '/profile',
   // verifyCoupons: '/coupons/verify',
-  // settings: '/settings',
+  settings: '/settings',
   // paymentSettings: '/settings/payment',
   // seoSettings: '/settings/seo',
   // eventSettings: '/settings/events',
@@ -18,8 +18,9 @@ export const Routes = {
   // promotionPopup: '/settings/promotion-popup',
   // storeSettings: '/vendor/settings',
   // storeKeepers: '/vendor/store_keepers',
-  // profileUpdate: '/profile-update',
-  // checkout: '/orders/checkout',
+  profileUpdate: '/profile-update',
+  checkout: '/orders/checkout',
+  bookingCheckout: '/bookings/checkout',
   // verifyEmail: '/verify-email',
   // verifyLicense: '/verify-license',
   user: {
@@ -118,9 +119,9 @@ export const Routes = {
   // notifyLogs: {
   //   ...routesFactory('/notify-logs'),
   // },
-  // faqs: {
-  //   ...routesFactory('/faqs'),
-  // },
+  faqs: {
+    ...routesFactory('/faqs'),
+  },
   // refundPolicies: {
   //   ...routesFactory('/refund-policies'),
   // },
