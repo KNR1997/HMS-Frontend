@@ -14,7 +14,7 @@ export default function Admins() {
   const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
-  const [orderBy, setOrder] = useState('username');
+  const [orderBy, setOrder] = useState('id');
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
   const { admins, paginatorInfo, loading, error } = useAdminsQuery({
@@ -24,8 +24,6 @@ export default function Admins() {
     orderBy,
     sortedBy,
   });
-
-  console.log('admins: ', admins)
 
   if (loading) return <Loader text={t('common:text-loading')} />;
   if (error) return <ErrorMessage message={error.message} />;

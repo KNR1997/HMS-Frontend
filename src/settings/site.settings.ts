@@ -73,6 +73,19 @@ export const siteSettings = {
         ],
       },
 
+      hotel: {
+        href: Routes.bookings.list,
+        label: 'Hotel Management',
+        icon: 'ShopIcon',
+        childMenu: [
+            {
+              href: Routes.bookings.list,
+              label: 'Hotel Details',
+              icon: 'ShopIcon',
+            },
+        ],
+      },
+
       // analytics: {
       //   href: '',
       //   label: 'Analytics',
@@ -126,30 +139,8 @@ export const siteSettings = {
                   label: 'Create booking',
                   icon: 'OrdersIcon',
                 },
-                // {
-                //   href: Routes.roomCategories.create,
-                //   label: 'Add new room category',
-                //   icon: 'ShopIcon',
-                // },
               ],
             },
-          // {
-          //   href: '',
-          //   label: 'sidebar-nav-item-rooms',
-          //   icon: 'ShopIcon',
-          //   childMenu: [
-          //     {
-          //       href: Routes.room.list,
-          //       label: 'text-all-rooms',
-          //       icon: 'MyShopIcon',
-          //     },
-          //     {
-          //       href: Routes.room.create,
-          //       label: 'text-add-all-rooms',
-          //       icon: 'ShopIcon',
-          //     },
-          //   ],
-          // },
         ],
       },
 
@@ -349,53 +340,6 @@ export const siteSettings = {
       //     },
       //   ],
       // },
-
-      layout: {
-        href: '',
-        label: 'text-page-control',
-        icon: 'SettingsIcon',
-        childMenu: [
-          // {
-          //   href: Routes.type.list,
-          //   label: 'text-groups',
-          //   icon: 'HomeIcon',
-          // },
-          {
-            href: '',
-            label: 'text-faqs',
-            icon: 'FaqIcon',
-            childMenu: [
-              {
-                href: Routes.faqs.list,
-                label: 'text-all-faqs',
-                icon: 'FaqIcon',
-              },
-              {
-                href: Routes.faqs.create,
-                label: 'text-new-faq',
-                icon: 'TypesIcon',
-              },
-            ],
-          },
-          // {
-          //   href: '',
-          //   label: 'text-terms-conditions',
-          //   icon: 'TermsIcon',
-          //   childMenu: [
-          //     {
-          //       href: Routes.termsAndCondition.list,
-          //       label: 'text-all-terms',
-          //       icon: 'TermsIcon',
-          //     },
-          //     {
-          //       href: Routes.termsAndCondition.create,
-          //       label: 'text-new-terms',
-          //       icon: 'TermsIcon',
-          //     },
-          //   ],
-          // },
-        ],
-      },
 
       // order: {
       //   href: Routes.order.list,
@@ -1222,23 +1166,29 @@ export const siteSettings = {
         permissions: ownerAndStaffOnly,
       },
       {
-        href: Routes?.ownerDashboardMyShop,
-        label: 'common:sidebar-nav-item-my-shops',
-        icon: 'MyShopOwnerIcon',
-        permissions: ownerAndStaffOnly,
-      },
-      {
-        href: Routes?.ownerDashboardMessage,
-        label: 'common:sidebar-nav-item-message',
-        icon: 'ChatOwnerIcon',
-        permissions: ownerAndStaffOnly,
-      },
-      {
-        href: Routes?.ownerDashboardNotice,
-        label: 'common:sidebar-nav-item-store-notice',
-        icon: 'StoreNoticeOwnerIcon',
-        permissions: ownerAndStaffOnly,
-      },
+        href: Routes.customerBookingCreate,
+        label: 'Create booking',
+        icon: 'OrdersIcon',
+        // permissions: ownerAndStaffOnly,
+      }
+      // {
+      //   href: Routes?.ownerDashboardMyShop,
+      //   label: 'common:sidebar-nav-item-my-shops',
+      //   icon: 'MyShopOwnerIcon',
+      //   permissions: ownerAndStaffOnly,
+      // },
+      // {
+      //   href: Routes?.ownerDashboardMessage,
+      //   label: 'common:sidebar-nav-item-message',
+      //   icon: 'ChatOwnerIcon',
+      //   permissions: ownerAndStaffOnly,
+      // },
+      // {
+      //   href: Routes?.ownerDashboardNotice,
+      //   label: 'common:sidebar-nav-item-store-notice',
+      //   icon: 'StoreNoticeOwnerIcon',
+      //   permissions: ownerAndStaffOnly,
+      // },
     ],
   },
   product: {

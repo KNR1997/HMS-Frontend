@@ -455,6 +455,8 @@
   "text-booking-pending": "Booking Pending",
   "text-booking-confirmed": "Booking Confirmed",
   "text-booking-cancelled": "Booking Cancelled",
+  "text-check-in": "Check In",
+  "text-check-out": "Check Out",
   "text-order-at-local-facility": "Order at local facility",
   "text-order-out-for-delivery": "Order Out For Delivery",
   "text-order-completed": "Order Completed",

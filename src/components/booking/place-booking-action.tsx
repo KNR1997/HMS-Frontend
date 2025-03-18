@@ -18,7 +18,6 @@ export const PlaceBookingAction: React.FC<{
   const { createOrder, isLoading: loading } = useCreateOrderMutation();
   const { rooms, isEmpty, total } = useBooking();
 
-  console.log("rooms: ", rooms);
   const { price: totalPrice } = usePrice({
     amount: total,
   });

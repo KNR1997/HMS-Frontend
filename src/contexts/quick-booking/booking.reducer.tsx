@@ -11,14 +11,14 @@ type Action =
   //   | { type: 'REMOVE_ITEM_OR_QUANTITY'; id: Item['id']; quantity?: number }
   //   | { type: 'ADD_ITEM'; id: Item['id']; item: Item }
   //   | { type: 'UPDATE_ITEM'; id: Item['id']; item: UpdateItemInput }
-  | { type: "REMOVE_ROOM"; id: Room["id"] };
-//   | { type: 'RESET_CART' };
+  | { type: "REMOVE_ROOM"; id: Room["id"] }
+  | { type: "RESET_CART" };
 
 export interface State {
   rooms: Room[];
   isEmpty: boolean;
   //   totalItems: number;
-  //   totalUniqueItems: number;
+  totalUniqueItems: number;
   total: number;
   //   meta?: Metadata | null;
 }
@@ -27,7 +27,7 @@ export const initialState: State = {
   rooms: [],
   isEmpty: true,
   //   totalItems: 0,
-  //   totalUniqueItems: 0,
+  totalUniqueItems: 0,
   total: 0,
   //   meta: null,
 };
@@ -58,8 +58,8 @@ export function bookingReducer(state: State, action: Action): State {
     //   const items = updateItem(state.items, action.id, action.item);
     //   return generateFinalState(state, items);
     // }
-    // case 'RESET_CART':
-    //   return initialState;
+    case "RESET_CART":
+      return initialState;
     default:
       return state;
   }
@@ -72,7 +72,7 @@ const generateFinalState = (state: State, rooms: Room[]) => {
     rooms: rooms,
     // rooms: calculateItemTotals(items),
     // totalItems: calculateTotalItems(items),
-    // totalUniqueItems,
+    totalUniqueItems,
     total: calculateTotal(rooms),
     isEmpty: totalUniqueItems === 0,
   };

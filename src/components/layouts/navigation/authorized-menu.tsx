@@ -38,9 +38,9 @@ export default function AuthorizedMenu() {
           <span className="w-full truncate font-semibold capitalize text-black">
             {data?.username}
           </span>
-          <span className="w-full truncate text-xs capitalize text-gray-400">
+          {/* <span className="w-full truncate text-xs capitalize text-gray-400">
             {role ? role.split("_").join(" ") : data?.email}
-          </span>
+          </span> */}
         </div>
       </Menu.Button>
 

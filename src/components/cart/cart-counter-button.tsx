@@ -4,10 +4,12 @@ import usePrice from '@/utils/use-price';
 import { useUI } from '@/contexts/ui.context';
 import { useCart } from '@/contexts/quick-cart/cart.context';
 import { useTranslation } from 'next-i18next';
+import { useBooking } from '@/contexts/quick-booking/booking.context';
 
 const CartCounterButton = () => {
   const { t } = useTranslation();
-  const { totalUniqueItems, total } = useCart();
+  // const { totalUniqueItems, total } = useCart();
+  const { totalUniqueItems, total } = useBooking();
   const { openCartSidebar } = useUI();
   const { price: totalPrice } = usePrice({
     amount: total,

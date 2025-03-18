@@ -19,7 +19,7 @@ export default function AllUsersPage() {
   const [page, setPage] = useState(1);
   const { t } = useTranslation();
 
-  const [orderBy, setOrder] = useState('username');
+  const [orderBy, setOrder] = useState('id');
   const [sortedBy, setColumn] = useState<SortOrder>(SortOrder.Desc);
 
   const { users, paginatorInfo, loading, error } = useUsersQuery({

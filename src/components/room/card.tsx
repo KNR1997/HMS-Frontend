@@ -16,8 +16,6 @@ const RoomCard = ({ room }: Props) => {
   const { t } = useTranslation();
   const { room_number, image, is_available, category, price } = room ?? {};
 
-  console.log('room: ', room)
-
   const { openModal } = useModalAction();
 
   // function handleVariableProduct() {

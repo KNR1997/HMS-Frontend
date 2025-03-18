@@ -15,7 +15,7 @@ interface BookingProviderState extends State {
   //   getItemFromCart: (id: Item['id']) => any | undefined;
   //   isInCart: (id: Item['id']) => boolean;
   //   isInStock: (id: Item['id']) => boolean;
-  //   resetCart: () => void;
+    resetCart: () => void;
 }
 
 export const bookingContext = React.createContext<
@@ -70,7 +70,7 @@ export const BookingProvider: React.FC<{ children?: React.ReactNode }> = (
   //   (id: Item['id']) => inStock(state.items, id),
   //   [state.items]
   // );
-  // const resetCart = () => dispatch({ type: 'RESET_CART' });
+  const resetCart = () => dispatch({ type: 'RESET_CART' });
   const value = React.useMemo(
     () => ({
       ...state,
@@ -82,7 +82,7 @@ export const BookingProvider: React.FC<{ children?: React.ReactNode }> = (
       // getItemFromCart,
       // isInCart,
       // isInStock,
-      // resetCart,
+      resetCart,
     }),
     //   [getItemFromCart, isInCart, isInStock, state]
     [state]

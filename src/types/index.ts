@@ -192,7 +192,7 @@ export interface PaginatorInfo<T> {
 }
 
 export interface LoginInput {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -1526,7 +1526,6 @@ export interface ContactDetailsInput {
 export interface RegisterInput {
   email: string;
   password: string;
-  name: string;
   shop_id?: number;
   // permission: Permission;
 }
