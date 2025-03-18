@@ -12,7 +12,7 @@ import AppLayout from '@/components/layouts/app';
 import { Routes } from '@/config/routes';
 import { Config } from '@/config';
 
-const AdminDashboard = dynamic(() => import('@/components/dashboard/admin'));
+const AdminDashboard = dynamic(() => import('@/components/dashboard/admin-original'));
 const OwnerDashboard = dynamic(() => import('@/components/dashboard/owner'));
 
 export default function Dashboard({

@@ -88,12 +88,12 @@ const UserList = ({
         />
       ),
       className: 'cursor-pointer',
-      dataIndex: 'username',
-      key: 'username',
+      dataIndex: 'email',
+      key: 'email',
       align: alignLeft,
       width: 250,
       ellipsis: true,
-      onHeaderCell: () => onHeaderClick('username'),
+      onHeaderCell: () => onHeaderClick('email'),
       render: (
         username: string,
         { profile, email }: { profile: any; email: string }
@@ -102,36 +102,36 @@ const UserList = ({
           <Avatar name={username} src={profile?.avatar?.thumbnail} />
           <div className="flex flex-col whitespace-nowrap font-medium ms-2">
             {username}
-            <span className="text-[13px] font-normal text-gray-500/80">
+            {/* <span className="text-[13px] font-normal text-gray-500/80">
               {email}
-            </span>
+            </span> */}
           </div>
         </div>
       ),
     },
-    {
-      title: t('table:table-item-permissions'),
-      dataIndex: 'permissions',
-      key: 'permissions',
-      align: alignLeft,
-      width: 300,
-      render: (permissions: any) => {
-        return (
-          <div className="flex flex-wrap gap-1.5 whitespace-nowrap">
-            {permissions?.map(
-              ({ name, index }: { name: string; index: number }) => (
-                <span
-                  key={index}
-                  className="rounded bg-gray-200/50 px-2.5 py-1"
-                >
-                  {name}
-                </span>
-              )
-            )}
-          </div>
-        );
-      },
-    },
+    // {
+    //   title: t('table:table-item-permissions'),
+    //   dataIndex: 'permissions',
+    //   key: 'permissions',
+    //   align: alignLeft,
+    //   width: 300,
+    //   render: (permissions: any) => {
+    //     return (
+    //       <div className="flex flex-wrap gap-1.5 whitespace-nowrap">
+    //         {permissions?.map(
+    //           ({ name, index }: { name: string; index: number }) => (
+    //             <span
+    //               key={index}
+    //               className="rounded bg-gray-200/50 px-2.5 py-1"
+    //             >
+    //               {name}
+    //             </span>
+    //           )
+    //         )}
+    //       </div>
+    //     );
+    //   },
+    // },
     // {
     //   title: t('table:table-item-available_wallet_points'),
     //   dataIndex: ['wallet', 'available_points'],

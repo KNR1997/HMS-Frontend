@@ -4,7 +4,7 @@ import Card from "@/components/common/card";
 import Search from "@/components/common/search";
 import { ArrowDown } from "@/components/icons/arrow-down";
 import { ArrowUp } from "@/components/icons/arrow-up";
-import Layout from "@/components/layouts/admin";
+import Layout from "@/components/layouts/owner";
 import ProductCard from "@/components/product/card";
 import CategoryTypeFilter from "@/components/filters/category-type-filter";
 import Drawer from "@/components/ui/drawer";
@@ -44,7 +44,7 @@ export default function BookingCreatePage() {
     // const { items, isEmpty: isEmptyCart } = useCart();
     const { rooms: roomsAdded } = useBooking();
 
-    // console.log('roomsAdded: ', roomsAdded)
+    console.log('roomsAdded: ', roomsAdded)
 
   // const { products, loading, paginatorInfo, error } = useProductsQuery({
   //   limit: 18,
@@ -175,9 +175,9 @@ export default function BookingCreatePage() {
     </>
   );
 }
-BookingCreatePage.authenticate = {
-  permissions: adminOnly,
-};
+// BookingCreatePage.authenticate = {
+//   permissions: adminOnly,
+// };
 BookingCreatePage.Layout = Layout;
 
 export const getStaticProps = async ({ locale }: any) => ({

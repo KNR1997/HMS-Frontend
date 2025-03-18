@@ -3,11 +3,21 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'next-i18next';
 import { mapPaginatorData } from '@/utils/data-mappers';
-import { Booking, BookingPaginator, BookingQueryOptions, CouponQueryOptions, Room } from '@/types';
+import {
+  Booking,
+  BookingPaginator,
+  BookingQueryOptions,
+  CouponQueryOptions,
+  Room,
+} from '@/types';
 import { Routes } from '@/config/routes';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { Config } from '@/config';
 import { bookingClient } from './client/booking';
+import { useAtom } from 'jotai';
+import { clearCheckoutAtom } from '@/contexts/checkout';
+import { useCart } from '@/contexts/quick-cart/cart.context';
+import { useBooking } from '@/contexts/quick-booking/booking.context';
 
 export const useBookingsQuery = (options: Partial<BookingQueryOptions>) => {
   const { data, error, isLoading } = useQuery<BookingPaginator, Error>(
@@ -56,6 +66,8 @@ export const useCreateBookingMutation = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
   const router = useRouter();
+  const { resetCart } = useBooking();
+  // const [, resetCheckout] = useAtom(clearCheckoutAtom);
 
   return useMutation(bookingClient.processBooking, {
     onSuccess: async () => {
@@ -66,6 +78,9 @@ export const useCreateBookingMutation = () => {
         locale: Config.defaultLanguage,
       });
       toast.success(t('common:successfully-created'));
+      resetCart();
+      // @ts-ignore
+      // resetCheckout();
     },
     onError: (error: any) => {
       toast.error(t(`common:${error?.response?.data.message}`));
@@ -85,11 +100,11 @@ export const useDeleteBookingMutation = () => {
   return useMutation(bookingClient.deleteWithEndpoint, {
     onSuccess: async () => {
       const generateRedirectUrl = router.query.shop
-      ? `/${router.query.shop}${Routes.bookings.list}`
-      : Routes.bookings.list;
-    await Router.push(generateRedirectUrl, undefined, {
-      locale: Config.defaultLanguage,
-    });
+        ? `/${router.query.shop}${Routes.bookings.list}`
+        : Routes.bookings.list;
+      await Router.push(generateRedirectUrl, undefined, {
+        locale: Config.defaultLanguage,
+      });
       toast.success(t('common:successfully-deleted'));
     },
     // Always refetch after error or success:
@@ -136,7 +151,7 @@ export const useBookingQuery = ({
     () => bookingClient.get({ booking_number, language }),
     {
       enabled: Boolean(booking_number),
-    }
+    },
   );
 
   return {

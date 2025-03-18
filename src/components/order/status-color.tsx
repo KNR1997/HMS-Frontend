@@ -14,6 +14,8 @@ const StatusColor = (status: string) => {
     bg_class = 'bg-status-processing bg-opacity-10 text-status-processing';
   } else if (
     status?.toLowerCase() === 'order-completed' ||
+    status?.toLowerCase() === 'checkout' ||
+    status?.toLowerCase() === 'checkout' ||
     status?.toLowerCase() === 'approved' ||
     status?.toLowerCase() === 'payment-success'
   ) {
@@ -26,6 +28,7 @@ const StatusColor = (status: string) => {
     bg_class = 'bg-status-canceled bg-opacity-10 text-status-canceled';
   } else if (
     status?.toLowerCase() === 'order-failed' ||
+    status?.toLowerCase() === 'cancelled' ||
     status?.toLowerCase() === 'payment-failed'
   ) {
     bg_class = 'bg-status-failed bg-opacity-10 text-status-failed';

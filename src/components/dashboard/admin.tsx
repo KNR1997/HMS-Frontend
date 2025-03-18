@@ -1,194 +1,64 @@
-import RecentOrders from '@/components/order/recent-orders';
-import { motion } from 'framer-motion';
-import PopularProductList from '@/components/product/popular-product-list';
-import ErrorMessage from '@/components/ui/error-message';
-import Loader from '@/components/ui/loader/loader';
-import ColumnChart from '@/components/widgets/column-chart';
-import StickerCard from '@/components/widgets/sticker-card';
-import WithdrawTable from '@/components/withdraw/withdraw-table';
-import Button from '@/components/ui/button';
-import {
-  useAnalyticsQuery,
-  usePopularProductsQuery,
-  useLowProductStockQuery,
-  useProductByCategoryQuery,
-  useTopRatedProductsQuery,
-} from '@/data/dashboard';
-import { useOrdersQuery } from '@/data/order';
-import { useWithdrawsQuery } from '@/data/withdraw';
-import usePrice from '@/utils/use-price';
-import { useTranslation } from 'next-i18next';
-import cn from 'classnames';
-import dynamic from 'next/dynamic';
-import { useRouter } from 'next/router';
-import LowStockProduct from '@/components/product/product-stock';
-import { useEffect, useState } from 'react';
-import { EaringIcon } from '@/components/icons/summary/earning';
-import { ShoppingIcon } from '@/components/icons/summary/shopping';
-import { BasketIcon } from '@/components/icons/summary/basket';
-import { ChecklistIcon } from '../icons/summary/checklist';
-import Search from '../common/search';
-
-// const TotalOrderByStatus = dynamic(
-//   () => import('@/components/dashboard/total-order-by-status')
-// );
-// const WeeklyDaysTotalOrderByStatus = dynamic(
-//   () => import('@/components/dashboard/total-order-by-status')
-// );
-// const MonthlyTotalOrderByStatus = dynamic(
-//   () => import('@/components/dashboard/total-order-by-status')
-// );
-
-const OrderStatusWidget = dynamic(
-  () => import('@/components/dashboard/widgets/box/widget-order-by-status'),
-);
-
-const ProductCountByCategory = dynamic(
-  () =>
-    import(
-      '@/components/dashboard/widgets/table/widget-product-count-by-category'
-    ),
-);
-
-const TopRatedProducts = dynamic(
-  () => import('@/components/dashboard/widgets/box/widget-top-rate-product'),
-);
+import StickerCard from "@/components/widgets/sticker-card";
+import { useTranslation } from "next-i18next";
+import { EaringIcon } from "@/components/icons/summary/earning";
+import { ShoppingIcon } from "@/components/icons/summary/shopping";
+import { BasketIcon } from "@/components/icons/summary/basket";
+import { ChecklistIcon } from "../icons/summary/checklist";
+import PageHeading from "@/components/common/page-heading";
+import { useRoomsQuery } from "@/data/room";
+import { useRoomCategoriesQuery } from "@/data/room-category";
 
 export default function Dashboard() {
-  // const { t } = useTranslation();
-  // const { locale } = useRouter();
-  // const { data, isLoading: loading } = useAnalyticsQuery();
-  // const [page, setPage] = useState(1);
-  // const [searchTerm, setSearchTerm] = useState('');
-  // const [activeTimeFrame, setActiveTimeFrame] = useState(1);
-  // const [orderDataRange, setOrderDataRange] = useState(
-  //   data?.todayTotalOrderByStatus,
-  // );
+  const { t } = useTranslation();
+  const { rooms, loading, paginatorInfo, error } = useRoomsQuery({
+    limit: 999,
+    page: 1,
+  });
 
-  // const { price: total_revenue } = usePrice(
-  //   data && {
-  //     amount: data?.totalRevenue!,
-  //   },
-  // );
-  // const { price: todays_revenue } = usePrice(
-  //   data && {
-  //     amount: data?.todaysRevenue!,
-  //   },
-  // );
-  // const {
-  //   error: orderError,
-  //   orders: orderData,
-  //   loading: orderLoading,
-  //   paginatorInfo: orderPaginatorInfo,
-  // } = useOrdersQuery({
-  //   language: locale,
-  //   limit: 5,
-  //   page,
-  //   tracking_number: searchTerm,
-  // });
-  // const {
-  //   data: popularProductData,
-  //   isLoading: popularProductLoading,
-  //   error: popularProductError,
-  // } = usePopularProductsQuery({ limit: 10, language: locale });
-
-  // const {
-  //   data: topRatedProducts,
-  //   isLoading: topRatedProductsLoading,
-  //   error: topRatedProductsError,
-  // } = useTopRatedProductsQuery({ limit: 10, language: locale });
-
-  // const {
-  //   data: lowStockProduct,
-  //   isLoading: lowStockProductLoading,
-  //   error: lowStockProductError,
-  // } = useLowProductStockQuery({
-  //   limit: 10,
-  //   language: locale,
-  // });
-
-  // const {
-  //   data: productByCategory,
-  //   isLoading: productByCategoryLoading,
-  //   error: productByCategoryError,
-  // } = useProductByCategoryQuery({ limit: 10, language: locale });
-
-  // const {
-  //   withdraws,
-  //   loading: withdrawLoading,
-  //   paginatorInfo: withdrawPaginatorInfo,
-  // } = useWithdrawsQuery({
-  //   limit: 10,
-  // });
-
-  // let salesByYear: number[] = Array.from({ length: 12 }, (_) => 0);
-  // if (!!data?.totalYearSaleByMonth?.length) {
-  //   salesByYear = data.totalYearSaleByMonth.map((item: any) =>
-  //     item.total.toFixed(2),
-  //   );
-  // }
-
-  // function handleSearch({ searchText }: { searchText: string }) {
-  //   setSearchTerm(searchText);
-  //   setPage(1);
-  // }
-
-  // function handlePagination(current: any) {
-  //   setPage(current);
-  // }
-
-  // const timeFrame = [
-  //   { name: t('text-today'), day: 1 },
-  //   { name: t('text-weekly'), day: 7 },
-  //   { name: t('text-monthly'), day: 30 },
-  //   { name: t('text-yearly'), day: 365 },
-  // ];
-
-  // useEffect(() => {
-  //   switch (activeTimeFrame) {
-  //     case 1:
-  //       setOrderDataRange(data?.todayTotalOrderByStatus);
-  //       break;
-  //     case 7:
-  //       setOrderDataRange(data?.weeklyTotalOrderByStatus);
-  //       break;
-  //     case 30:
-  //       setOrderDataRange(data?.monthlyTotalOrderByStatus);
-  //       break;
-  //     case 365:
-  //       setOrderDataRange(data?.yearlyTotalOrderByStatus);
-  //       break;
-
-  //     default:
-  //       setOrderDataRange(orderDataRange);
-  //       break;
-  //   }
-  // });
-
-  // if (
-  //   loading ||
-  //   orderLoading ||
-  //   popularProductLoading ||
-  //   withdrawLoading ||
-  //   topRatedProductsLoading
-  // ) {
-  //   return <Loader text={t('common:text-loading')} />;
-  // }
-  // if (orderError || popularProductError || topRatedProductsError) {
-  //   return (
-  //     <ErrorMessage
-  //       message={
-  //         orderError?.message ||
-  //         popularProductError?.message ||
-  //         topRatedProductsError?.message
-  //       }
-  //     />
-  //   );
-  // }
+  const { roomCategories } = useRoomCategoriesQuery({
+    limit: 999,
+    page: 1,
+  });
+  
+  // Filter available rooms and get the count
+  const availableRooms = rooms?.filter((room) => room.is_available === true)
+    .length;
 
   return (
     <div>
-
+      <div className="mb-8 rounded-lg bg-light p-5 md:p-8">
+        <div className="mb-7 flex items-center justify-between">
+          <PageHeading title={t("text-summary")} />
+        </div>
+        <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <StickerCard
+            titleTransKey="Total Rooms"
+            // subtitleTransKey="sticker-card-subtitle-rev"
+            icon={<EaringIcon className="h-8 w-8" />}
+            color="#047857"
+            price={rooms.length}
+          />
+          <StickerCard
+            titleTransKey="Available Rooms"
+            // subtitleTransKey="sticker-card-subtitle-order"
+            icon={<ShoppingIcon className="h-8 w-8" />}
+            color="#865DFF"
+            price={availableRooms}
+          />
+          <StickerCard
+            titleTransKey="Room Categories"
+            icon={<BasketIcon className="h-8 w-8" />}
+            color="#E157A0"
+            price={roomCategories.length}
+          />
+          <StickerCard
+            titleTransKey="Total Customers"
+            icon={<ChecklistIcon className="h-8 w-8" />}
+            color="#D74EFF"
+            // price={todays_revenue}
+          />
+        </div>
+      </div>
     </div>
     // <div className="grid gap-7 md:gap-8 lg:grid-cols-2 2xl:grid-cols-12">
     //   <div className="col-span-full rounded-lg bg-light p-6 md:p-7">

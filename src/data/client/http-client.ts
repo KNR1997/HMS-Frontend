@@ -23,10 +23,13 @@ Axios.interceptors.request.use((config) => {
     token = JSON.parse(cookies)['token'];
   }
   // @ts-ignore
-  config.headers = {
-    ...config.headers,
-    Authorization: `Bearer ${token}`,
-  };
+  if (token) {
+    //@ts-ignore
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
   return config;
 });
 

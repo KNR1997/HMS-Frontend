@@ -2,8 +2,10 @@ import React from 'react';
 import { IosArrowDown } from '@/components/icons/ios-arrow-down';
 import { IosArrowUp } from '@/components/icons/ios-arrow-up';
 import { useTranslation } from 'next-i18next';
+import { DownloadIconColored } from '@/components/icons/download-icon-colored';
 
 const StickerCard = ({
+  type,
   titleTransKey,
   subtitleTransKey,
   icon,
@@ -14,6 +16,8 @@ const StickerCard = ({
   note,
   link,
   linkText,
+  showDownload = true,
+  buttonClick,
 }: any) => {
   const { t } = useTranslation('widgets');
   return (
@@ -37,7 +41,15 @@ const StickerCard = ({
           </span>
         </div>
       </div>
-
+      {showDownload && (
+        <span
+          onClick={() => buttonClick(type)}
+          className="flex justify-end cursor-pointer items-center gap-2"
+        >
+          {/* <span className="text-xs text-body">Generate</span> */}
+          <DownloadIconColored />
+        </span>
+      )}
       {indicator === 'up' && (
         <span
           className="mb-12 inline-block text-sm font-semibold text-body"

@@ -49,6 +49,7 @@ import { Routes } from "@/config/routes";
 import { TrashIcon } from "@/components/icons/trash";
 import { useDeleteBookingItemMutation } from "@/data/booking-item";
 import { useModalAction } from "@/components/ui/modal/modal.context";
+import { useBooking } from "@/contexts/quick-booking/booking.context";
 
 type FormValues = {
   order_status: any;
@@ -57,7 +58,7 @@ export default function OrderDetailsPage() {
   const { t } = useTranslation();
   const { query, locale } = useRouter();
   const { alignLeft, alignRight, isRTL } = useIsRTL();
-  const { resetCart } = useCart();
+  const { resetCart } = useBooking();
   const [, resetCheckout] = useAtom(clearCheckoutAtom);
   const { openModal } = useModalAction();
 
@@ -316,7 +317,12 @@ export default function OrderDetailsPage() {
 
                 <ValidationError message={t(errors?.order_status?.message)} />
               </div>
-              <Button loading={updating}>
+              <Button
+                loading={updating}
+                disabled={["CheckOut", "Cancelled"].includes(
+                  booking?.status as string
+                )}
+              >
                 <span className="hidden sm:block">
                   {t("form:button-label-change-status")}
                 </span>

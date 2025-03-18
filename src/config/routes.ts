@@ -136,6 +136,7 @@ export const Routes = {
   // termsAndCondition: {
   //   ...routesFactory('/terms-and-conditions'),
   // },
+  customerBookingCreate: '/bookings/customer-create',
   adminList: '/users/admins',
   // vendorList: '/users/vendors',
   // pendingVendorList: '/users/vendors/pending',

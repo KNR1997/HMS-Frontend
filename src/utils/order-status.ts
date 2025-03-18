@@ -3,7 +3,10 @@ import { PaymentStatus } from '@/types';
 export const ORDER_STATUS = [
   { name: 'text-booking-pending', status: 'Pending', serial: 1 },
   { name: 'text-booking-confirmed', status: 'Confirmed', serial: 2 },
-  { name: 'text-booking-cancelled', status: 'Cancelled', serial: 3 },
+  { name: 'text-check-in', status: 'CheckIn', serial: 3 },
+
+  { name: 'text-booking-cancelled', status: 'Cancelled', serial: 4 },
+  { name: 'text-check-out', status: 'CheckOut', serial: 4 },
   // { name: 'text-order-processing', status: 'Processing', serial: 2 },
   // {
   //   name: 'text-order-at-local-facility',

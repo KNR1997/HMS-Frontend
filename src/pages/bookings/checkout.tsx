@@ -90,6 +90,7 @@ export default function BookingCheckoutPage() {
       booking_items: rooms,
       check_in: formatDate(new Date(values.check_in)),
       check_out: formatDate(new Date(values.check_out)),
+      status: 'Confirmed',
     };
     createBooking(data);
   };

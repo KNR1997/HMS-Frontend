@@ -79,8 +79,8 @@ const BookingList = ({
     },
     {
       title: "Customer",
-      dataIndex: "user",
-      key: "user",
+      dataIndex: "customer_name",
+      key: "customer_name",
       align: alignLeft,
     },
     {

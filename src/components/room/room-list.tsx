@@ -230,7 +230,7 @@ const RoomList = ({
           textKey={is_available ? 'Yes' : 'No'}
           color={
             is_available
-              ? 'bg-accent/10 !text-accent'
+              ? 'bg-status-complete bg-opacity-10 text-status-complete'
               : 'bg-status-failed/10 text-status-failed'
           }
         />
