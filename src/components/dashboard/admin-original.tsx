@@ -7,17 +7,23 @@ import { ChecklistIcon } from "../icons/summary/checklist";
 import PageHeading from "@/components/common/page-heading";
 import { useRoomsQuery } from "@/data/room";
 import { useRoomCategoriesQuery } from "@/data/room-category";
+import { useBookingsQuery } from "@/data/booking-item";
 
 export default function DashboardOriginal() {
   const { t } = useTranslation();
   const url_prefix = process.env.NEXT_PUBLIC_DJANGO_API_ENDPOINT;
 
-  const { rooms, loading, paginatorInfo, error } = useRoomsQuery({
+  const { rooms } = useRoomsQuery({
     limit: 999,
     page: 1,
   });
 
   const { roomCategories } = useRoomCategoriesQuery({
+    limit: 999,
+    page: 1,
+  });
+
+  const { bookings } = useBookingsQuery({
     limit: 999,
     page: 1,
   });
@@ -28,24 +34,24 @@ export default function DashboardOriginal() {
 
   function downloadTotalRoomsReport() {
     const url = `${url_prefix}analytics/total-rooms`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   function downloadAvailableRoomsReport() {
     const url = `${url_prefix}analytics/available-rooms`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
   function downloadRoomCategoriesReport() {
     const url = `${url_prefix}analytics/room-categories`;
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   }
 
-  // function downloadTotalRoomsReport() {
-  //   const url = `${url_prefix}analytics/total-rooms`;
-  //   window.open(url, '_blank');
-  // }
-  
+  function downloadBookingsReport() {
+    const url = `${url_prefix}analytics/bookings`;
+    window.open(url, "_blank");
+  }
+
   return (
     <div>
       <div className="mb-8 rounded-lg bg-light p-5 md:p-8">
@@ -77,10 +83,11 @@ export default function DashboardOriginal() {
             buttonClick={() => downloadRoomCategoriesReport()}
           />
           <StickerCard
-            titleTransKey="Total Customers"
+            titleTransKey="Total Bookings"
             icon={<ChecklistIcon className="h-8 w-8" />}
             color="#D74EFF"
-            // price={todays_revenue}
+            price={bookings.length}
+            buttonClick={() => downloadBookingsReport()}
           />
         </div>
       </div>

@@ -13,6 +13,8 @@ export const API_ENDPOINTS = {
   POPULAR_PRODUCTS: 'popular-products',
   COUPONS: 'coupons',
   BOOKINGS: 'bookings',
+  HOTEL: 'hotel',
+  HOTELS: 'hotels',
   BOOKING_ITEMS: 'booking-items',
   ROOMS: 'rooms',
   ROOM_CATEGORIES: 'room-categories',

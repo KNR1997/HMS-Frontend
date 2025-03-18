@@ -211,9 +211,9 @@ export default function BookingCheckoutPage() {
     </div>
   );
 }
-BookingCheckoutPage.authenticate = {
-  permissions: adminOnly,
-};
+// BookingCheckoutPage.authenticate = {
+//   permissions: adminOnly,
+// };
 BookingCheckoutPage.Layout = Layout;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({

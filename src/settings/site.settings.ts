@@ -74,12 +74,12 @@ export const siteSettings = {
       },
 
       hotel: {
-        href: Routes.bookings.list,
+        href: Routes.hotelDetails,
         label: 'Hotel Management',
         icon: 'ShopIcon',
         childMenu: [
             {
-              href: Routes.bookings.list,
+              href: Routes.hotelDetails,
               label: 'Hotel Details',
               icon: 'ShopIcon',
             },

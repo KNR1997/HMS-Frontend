@@ -35,8 +35,11 @@ export default function AuthorizedMenu() {
           className="shrink-0 grow-0 basis-auto drop-shadow"
         />
         <div className="hidden w-[calc(100%-48px)] flex-col items-start space-y-0.5 truncate text-sm ltr:text-left rtl:text-right xl:flex">
-          <span className="w-full truncate font-semibold capitalize text-black">
-            {data?.username}
+          {/* <span className="w-full truncate font-semibold capitalize text-black">
+            {data?.email}
+          </span> */}
+          <span className="w-full truncate text-xs text-gray-400">
+            {data?.email}
           </span>
           {/* <span className="w-full truncate text-xs capitalize text-gray-400">
             {role ? role.split("_").join(" ") : data?.email}
