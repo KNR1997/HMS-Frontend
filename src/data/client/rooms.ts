@@ -15,11 +15,11 @@ export const roomClient = {
       language,
     });
   },
-  paginated: ({ room_number, ...params }: Partial<RoomQueryOptions>) => {
+  paginated: ({ room_number, category, ...params }: Partial<RoomQueryOptions>) => {
     return HttpClient.get<RoomPaginator>(API_ENDPOINTS.ROOMS, {
       searchJoin: 'and',
       ...params,
-      search: HttpClient.formatSearchParams({ room_number }),
+      search: HttpClient.formatSearchParams({ room_number, category }),
     });
   },
 };

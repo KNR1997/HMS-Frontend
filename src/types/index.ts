@@ -438,6 +438,7 @@ export interface User {
   address: Address[];
   orders?: OrderPaginator;
   email_verified: boolean;
+  is_admin: boolean;
 }
 
 export interface Domain {
@@ -1912,6 +1913,7 @@ export interface RoomCategoryQueryOptions extends QueryOptions {
 
 export interface RoomQueryOptions extends QueryOptions {
   room_number: string;
+  category: string;
 }
 
 export interface BookingQueryOptions extends QueryOptions {

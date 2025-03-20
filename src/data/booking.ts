@@ -37,6 +37,24 @@ export const useBookingsQuery = (options: Partial<BookingQueryOptions>) => {
   };
 };
 
+export const useMyBookingsQuery = (options: Partial<BookingQueryOptions>) => {
+  const { data, error, isLoading } = useQuery<BookingPaginator, Error>(
+    [`${API_ENDPOINTS.BOOKINGS}/my-bookings/`, options],
+    ({ queryKey, pageParam }) =>
+      bookingClient.myBookings(Object.assign({}, queryKey[1], pageParam)),
+    {
+      keepPreviousData: true,
+    },
+  );
+
+  return {
+    bookings: data?.data ?? [],
+    paginatorInfo: mapPaginatorData(data),
+    error,
+    loading: isLoading,
+  };
+};
+
 export const useCreateRoomMutation = () => {
   const queryClient = useQueryClient();
   const { t } = useTranslation();
@@ -91,6 +109,37 @@ export const useCreateBookingMutation = () => {
     },
   });
 };
+
+export const useCreateBookingByCustomerMutation = () => {
+  const queryClient = useQueryClient();
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { resetCart } = useBooking();
+  // const [, resetCheckout] = useAtom(clearCheckoutAtom);
+
+  return useMutation(bookingClient.processBookingByCustomer, {
+    onSuccess: async () => {
+      // const generateRedirectUrl = router.query.shop
+      //   ? `/${router.query.shop}${Routes.room.list}`
+      //   : Routes.bookings.list;
+      // await Router.push(generateRedirectUrl, undefined, {
+      //   locale: Config.defaultLanguage,
+      // });
+      toast.success(t('common:successfully-created'));
+      resetCart();
+      // @ts-ignore
+      // resetCheckout();
+    },
+    onError: (error: any) => {
+      toast.error(t(`common:${error?.response?.data.error}`));
+    },
+    // Always refetch after error or success:
+    onSettled: () => {
+      queryClient.invalidateQueries(API_ENDPOINTS.ROOMS);
+    },
+  });
+};
+
 
 export const useDeleteBookingMutation = () => {
   const queryClient = useQueryClient();

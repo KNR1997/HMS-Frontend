@@ -1,34 +1,39 @@
-import { useRouter } from 'next/router';
-import { motion } from 'framer-motion';
-import CartCheckBagIcon from '@/components/icons/cart-check-bag';
-import EmptyCartIcon from '@/components/icons/empty-cart';
-import { CloseIcon } from '@/components/icons/close-icon';
-import CartItem from '@/components/cart/item';
-import { fadeInOut } from '@/utils/motion/fade-in-out';
-import { formatString } from '@/utils/format-string';
-import { useTranslation } from 'next-i18next';
-import { useUI } from '@/contexts/ui.context';
-import { Routes } from '@/config/routes';
-import usePrice from '@/utils/use-price';
-import { useCart } from '@/contexts/quick-cart/cart.context';
-import { useBooking } from '@/contexts/quick-booking/booking.context';
-import BookingItem from './add-room/item';
+import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+import CartCheckBagIcon from "@/components/icons/cart-check-bag";
+import EmptyCartIcon from "@/components/icons/empty-cart";
+import { CloseIcon } from "@/components/icons/close-icon";
+import CartItem from "@/components/cart/item";
+import { fadeInOut } from "@/utils/motion/fade-in-out";
+import { formatString } from "@/utils/format-string";
+import { useTranslation } from "next-i18next";
+import { useUI } from "@/contexts/ui.context";
+import { Routes } from "@/config/routes";
+import usePrice from "@/utils/use-price";
+import { useCart } from "@/contexts/quick-cart/cart.context";
+import { useBooking } from "@/contexts/quick-booking/booking.context";
+import BookingItem from "./add-room/item";
+import { useMeQuery } from "@/data/user";
 // import { drawerAtom } from '@store/drawer-atom';
 
 const Cart = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation("common");
   // const { items, totalUniqueItems, total } = useCart();
   const { rooms, total } = useBooking();
-
+  const { data: me } = useMeQuery();
   const { closeCartSidebar } = useUI();
 
   // const [_, closeSidebar] = useAtom(drawerAtom);
   const router = useRouter();
 
   function handleCheckout() {
+    if (me?.is_admin) {
+      router.push(Routes.bookingCheckout);
+    } else {
+      router.push(Routes.bookingCustomerCheckout);
+    }
     // const regularCheckout = items.find((item) => item.is_digital === false);
     // if (regularCheckout) {
-    router.push(Routes.bookingCheckout);
     // } else {
     // router.push(ROUTES.CHECKOUT_DIGITAL);
     // }
@@ -52,7 +57,7 @@ const Cart = () => {
           onClick={closeCartSidebar}
           className="-me-2 flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 text-muted transition-all duration-200 ms-3 hover:bg-accent hover:text-light focus:bg-accent focus:text-light focus:outline-none"
         >
-          <span className="sr-only">{t('text-close')}</span>
+          <span className="sr-only">{t("text-close")}</span>
           <CloseIcon className="h-3 w-3" />
         </button>
       </header>
@@ -72,7 +77,7 @@ const Cart = () => {
           >
             <EmptyCartIcon width={140} height={176} />
             <h4 className="mt-6 text-base font-semibold">
-              {t('text-no-products')}
+              {t("text-no-products")}
             </h4>
           </motion.div>
         )}
@@ -85,7 +90,7 @@ const Cart = () => {
           onClick={handleCheckout}
         >
           <span className="flex h-full flex-1 items-center px-5 text-light">
-            {t('text-checkout')}
+            {t("text-checkout")}
           </span>
           <span className="flex h-full flex-shrink-0 items-center rounded-full bg-light px-5 text-accent">
             {totalPrice}

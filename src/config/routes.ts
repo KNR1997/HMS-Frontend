@@ -21,6 +21,7 @@ export const Routes = {
   profileUpdate: '/profile-update',
   checkout: '/orders/checkout',
   bookingCheckout: '/bookings/checkout',
+  bookingCustomerCheckout: '/bookings/customer-checkout',
   // verifyEmail: '/verify-email',
   // verifyLicense: '/verify-license',
   user: {
@@ -139,6 +140,7 @@ export const Routes = {
   hotelDetails: '/hotels',
   customerBookingCreate: '/bookings/customer-create',
   adminList: '/users/admins',
+  myBookings: '/bookings/my-bookings',
   // vendorList: '/users/vendors',
   // pendingVendorList: '/users/vendors/pending',
   // customerList: '/users/customer',
