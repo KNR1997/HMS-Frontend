@@ -26,7 +26,17 @@ export const bookingClient = {
       search: HttpClient.formatSearchParams({ user }),
     });
   },
+  myBookings: ({ user, ...params }: Partial<BookingQueryOptions>) => {
+    return HttpClient.get<BookingPaginator>(`${API_ENDPOINTS.BOOKINGS}/my-bookings/`, {
+      searchJoin: 'and',
+      ...params,
+      search: HttpClient.formatSearchParams({ user }),
+    });
+  },
   processBooking: (data: BookingInput) => {
     return HttpClient.post(`admin/process-booking`, data)
+  },
+  processBookingByCustomer: (data: BookingInput) => {
+    return HttpClient.post(`customer/process-booking`, data)
   }
 };

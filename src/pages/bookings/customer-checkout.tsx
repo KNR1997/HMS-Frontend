@@ -2,12 +2,12 @@ import { useTranslation } from "next-i18next";
 import { customerAtom } from "@/contexts/checkout";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps } from "next";
-import Layout from "@/components/layouts/admin";
+import Layout from "@/components/layouts/owner";
 import { adminOnly } from "@/utils/auth-utils";
 import { useEffect, useState } from "react";
 import { useAtom } from "jotai";
 import Loader from "@/components/ui/loader/loader";
-import { useUserQuery } from "@/data/user";
+import { useMeQuery, useUserQuery } from "@/data/user";
 import { useBooking } from "@/contexts/quick-booking/booking.context";
 import BookingCard from "@/components/checkout/item/booking-card";
 import EmptyCartIcon from "@/components/icons/empty-cart";
@@ -19,9 +19,13 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import DatePicker from "@/components/ui/date-picker";
-import { useCreateBookingMutation } from "@/data/booking";
+import {
+  useCreateBookingByCustomerMutation,
+  useCreateBookingMutation,
+} from "@/data/booking";
 
 type FormValues = {
+  email: string;
   name: string;
   id_number: string;
   check_in: string;
@@ -29,7 +33,7 @@ type FormValues = {
 };
 
 export const validationSchema = yup.object().shape({
-  name: yup.string().required("Customer name is required"),
+  name: yup.string().required("Name is required"),
   id_number: yup.string().required("Customer ID is required"),
   check_in: yup.string().required("Check-In is required"),
   check_out: yup.string().required("Check-Out is required"),
@@ -40,12 +44,18 @@ export const validationSchema = yup.object().shape({
   // room_category: yup.object().required('Room Category is required'),
 });
 
-export default function BookingCheckoutPage() {
+export default function BookingCustomerCheckoutPage() {
   const [customer] = useAtom(customerAtom);
   const { t } = useTranslation();
   const { rooms, isEmpty, total } = useBooking();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { mutate: createBooking, isLoading } = useCreateBookingMutation();
+  const {
+    mutate: createBooking,
+    isLoading,
+  } = useCreateBookingByCustomerMutation();
+  const { data: customerData, isLoading: meLoading } = useMeQuery();
+
+  console.log("Medata: ", customerData);
 
   const {
     register,
@@ -57,6 +67,9 @@ export default function BookingCheckoutPage() {
     formState: { errors },
   } = useForm<FormValues>({
     // @ts-ignore
+    defaultValues: {
+      email: customerData?.email,
+    },
     // defaultValues: initialValues
     //   ? {
     //       ...initialValues,
@@ -90,10 +103,12 @@ export default function BookingCheckoutPage() {
       booking_items: rooms,
       check_in: formatDate(new Date(values.check_in)),
       check_out: formatDate(new Date(values.check_out)),
-      status: 'Confirmed',
+      status: "Confirmed",
     };
+    console.log("data: ", data);
     createBooking(data);
   };
+
   return (
     <div className="bg-gray-100">
       <div className="lg:space-s-8 m-auto flex w-full max-w-5xl flex-col items-center lg:flex-row lg:items-start">
@@ -112,6 +127,16 @@ export default function BookingCheckoutPage() {
 
             <form>
               <div className="flex flex-col flex-wrap my-5 sm:my-8">
+                <Input
+                  label="Email"
+                  {...register("email")}
+                  error={t(errors.email?.message!)}
+                  variant="outline"
+                  className="mb-5"
+                  // disabled={isTranslateCoupon}
+                  required
+                  disabled
+                />
                 <Input
                   label="Name"
                   {...register("name")}
@@ -211,10 +236,10 @@ export default function BookingCheckoutPage() {
     </div>
   );
 }
-BookingCheckoutPage.authenticate = {
-  permissions: adminOnly,
-};
-BookingCheckoutPage.Layout = Layout;
+// BookingCheckoutPage.authenticate = {
+//   permissions: adminOnly,
+// };
+BookingCustomerCheckoutPage.Layout = Layout;
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {

@@ -3,13 +3,13 @@ import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'next-i18next';
 import { mapPaginatorData } from '@/utils/data-mappers';
-import { CouponQueryOptions, Room, RoomPaginator } from '@/types';
+import { CouponQueryOptions, Room, RoomPaginator, RoomQueryOptions } from '@/types';
 import { Routes } from '@/config/routes';
 import { API_ENDPOINTS } from './client/api-endpoints';
 import { Config } from '@/config';
 import { roomClient } from './client/rooms';
 
-export const useRoomsQuery = (options: Partial<CouponQueryOptions>) => {
+export const useRoomsQuery = (options: Partial<RoomQueryOptions>) => {
   const { data, error, isLoading } = useQuery<RoomPaginator, Error>(
     [API_ENDPOINTS.ROOMS, options],
     ({ queryKey, pageParam }) =>

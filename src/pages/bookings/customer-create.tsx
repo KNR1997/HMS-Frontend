@@ -28,6 +28,7 @@ import { useRoomsQuery } from "@/data/room";
 import RoomCard from "@/components/room/card";
 import { useCart } from "@/contexts/quick-cart/cart.context";
 import { useBooking } from "@/contexts/quick-booking/booking.context";
+import RoomTypeFilter from "@/components/filters/room-type-filter";
 
 export default function BookingCreatePage() {
   const { locale } = useRouter();
@@ -63,6 +64,7 @@ export default function BookingCreatePage() {
     // name: searchTerm,
     page,
     orderBy: "room_number",
+    category: category,
     // type,
     // categories: category,
   });
@@ -107,29 +109,31 @@ export default function BookingCreatePage() {
           </button>
         </div>
 
-        {/* <div
+        <div
           className={cn("flex w-full transition", {
             "visible h-auto": visible,
             "invisible h-0": !visible,
           })}
         >
           <div className="mt-5 flex w-full flex-col border-t border-gray-200 pt-5 md:mt-8 md:flex-row md:items-center md:pt-8">
-            <CategoryTypeFilter
+            <RoomTypeFilter
               type={type}
-              onCategoryFilter={(category: Category) => {
+              onRoomCategoryFilter={(category: Category) => {
+                console.log('category: ', category)
                 setCategory(category?.slug!);
                 setPage(1);
               }}
-              onTypeFilter={(type: Type) => {
-                setType(type?.slug!);
-                setPage(1);
-              }}
+              // onTypeFilter={(type: Type) => {
+              //   setType(type?.slug!);
+              //   setPage(1);
+              // }}
               className="w-full"
-              enableCategory
-              enableType
+              // enableCategory
+              // enableType
+              enableRoomCategory
             />
           </div>
-        </div> */}
+        </div>
       </Card>
 
       {/* <Card> */}

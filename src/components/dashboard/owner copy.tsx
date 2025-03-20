@@ -50,6 +50,86 @@ const MAP_PAGE_LIST: Record<string, any> = {
 };
 
 const OwnerShopLayout = () => {
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+  const router = useRouter();
+  const { permissions } = getAuthCredentials();
+  const { data, isLoading: loading } = useAnalyticsQuery();
+  const [activeTimeFrame, setActiveTimeFrame] = useState(1);
+  const [orderDataRange, setOrderDataRange] = useState(
+    data?.todayTotalOrderByStatus,
+  );
+
+  const {
+    data: productByCategory,
+    isLoading: productByCategoryLoading,
+    error: productByCategoryError,
+  } = useProductByCategoryQuery({ limit: 10, language: locale });
+
+  const {
+    data: topRatedProducts,
+    isLoading: topRatedProductsLoading,
+    error: topRatedProductsError,
+  } = useTopRatedProductsQuery({ limit: 10, language: locale });
+
+  const { price: total_revenue } = usePrice(
+    data && {
+      amount: data?.totalRevenue!,
+    },
+  );
+  const { price: total_refund } = usePrice(
+    data && {
+      amount: data?.totalRefunds!,
+    },
+  );
+
+  const { price: todays_revenue } = usePrice(
+    data && {
+      amount: data?.todaysRevenue!,
+    },
+  );
+  const { query } = router;
+
+  const classNames = {
+    basic:
+      'lg:text-[1.375rem] font-semibold border-b-2 border-solid border-transparent lg:pb-5 pb-3 -mb-0.5',
+    selected: 'text-accent hover:text-accent-hover border-current',
+    normal: 'hover:text-black/80',
+  };
+  let salesByYear: number[] = Array.from({ length: 12 }, (_) => 0);
+  if (!!data?.totalYearSaleByMonth?.length) {
+    salesByYear = data.totalYearSaleByMonth.map((item: any) =>
+      item.total.toFixed(2),
+    );
+  }
+
+  const timeFrame = [
+    { name: t('text-today'), day: 1 },
+    { name: t('text-weekly'), day: 7 },
+    { name: t('text-monthly'), day: 30 },
+    { name: t('text-yearly'), day: 365 },
+  ];
+
+  useEffect(() => {
+    switch (activeTimeFrame) {
+      case 1:
+        setOrderDataRange(data?.todayTotalOrderByStatus);
+        break;
+      case 7:
+        setOrderDataRange(data?.weeklyTotalOrderByStatus);
+        break;
+      case 30:
+        setOrderDataRange(data?.todayTotalOrderByStatus);
+        break;
+      case 365:
+        setOrderDataRange(data?.yearlyTotalOrderByStatus);
+        break;
+
+      default:
+        setOrderDataRange(orderDataRange);
+        break;
+    }
+  });
 
   return (
     <>

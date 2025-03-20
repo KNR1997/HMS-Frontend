@@ -1170,6 +1170,12 @@ export const siteSettings = {
         label: 'Create booking',
         icon: 'OrdersIcon',
         // permissions: ownerAndStaffOnly,
+      },
+      {
+        href: Routes.myBookings,
+        label: 'My booking',
+        icon: 'OrdersIcon',
+        // permissions: ownerAndStaffOnly,
       }
       // {
       //   href: Routes?.ownerDashboardMyShop,
