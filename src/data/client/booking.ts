@@ -19,11 +19,11 @@ export const bookingClient = {
       language,
     });
   },
-  paginated: ({ user, ...params }: Partial<BookingQueryOptions>) => {
+  paginated: ({ user, customer_name, ...params }: Partial<BookingQueryOptions>) => {
     return HttpClient.get<BookingPaginator>(API_ENDPOINTS.BOOKINGS, {
       searchJoin: 'and',
       ...params,
-      search: HttpClient.formatSearchParams({ user }),
+      search: HttpClient.formatSearchParams({ user, customer_name }),
     });
   },
   myBookings: ({ user, ...params }: Partial<BookingQueryOptions>) => {

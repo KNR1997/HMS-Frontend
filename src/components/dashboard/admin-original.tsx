@@ -52,6 +52,11 @@ export default function DashboardOriginal() {
     window.open(url, "_blank");
   }
 
+  function downloadRevenueReport() {
+    const url = `${url_prefix}analytics/revenue`;
+    window.open(url, "_blank");
+  }
+
   return (
     <div>
       <div className="mb-8 rounded-lg bg-light p-5 md:p-8">
@@ -88,6 +93,13 @@ export default function DashboardOriginal() {
             color="#D74EFF"
             price={bookings.length}
             buttonClick={() => downloadBookingsReport()}
+          />
+          <StickerCard
+            titleTransKey="Total Revenue"
+            icon={<ChecklistIcon className="h-8 w-8" />}
+            color="#D74EFF"
+            // price={bookings.length}
+            buttonClick={() => downloadRevenueReport()}
           />
         </div>
       </div>

@@ -43,7 +43,7 @@ export default function RoomsPage() {
     // type,
     // categories: category,
     // product_type: productType,
-    // name: searchTerm,
+    category: searchTerm,
     orderBy,
     sortedBy,
   });
@@ -68,7 +68,7 @@ export default function RoomsPage() {
             <PageHeading title='Rooms' />
           </div>
 
-          {/* <div className="flex w-full flex-col items-center ms-auto md:w-2/4">
+          <div className="flex w-full flex-col items-center ms-auto md:w-2/4">
             <Search
               onSearch={handleSearch}
               placeholderText={t('form:input-placeholder-search-name')}
@@ -85,7 +85,7 @@ export default function RoomsPage() {
             ) : (
               <ArrowDown className="ms-2" />
             )}
-          </button> */}
+          </button>
         </div>
 
         {/* <div

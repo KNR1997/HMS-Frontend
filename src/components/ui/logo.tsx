@@ -32,18 +32,18 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
         <span
           className="relative overflow-hidden "
           style={{
-            width: siteSettings.collapseLogo.width,
-            height: siteSettings.collapseLogo.height,
+            width: '100px',
+            height: '100px',
           }}
         >
           <Image
             src={
-              settings?.options?.collapseLogo?.original ??
+              // settings?.options?.collapseLogo?.original ??
               siteSettings.collapseLogo.url
             }
             alt={settings?.options?.siteTitle ?? siteSettings.collapseLogo.alt}
             fill
-            sizes="(max-width: 768px) 100vw"
+            sizes="(max-width: 1200px) 100vw"
             className="object-contain"
             loading="eager"
           />
@@ -52,15 +52,18 @@ const Logo: React.FC<React.AnchorHTMLAttributes<{}>> = ({
         <span
           className="relative overflow-hidden "
           style={{
-            width: siteSettings.logo.width,
-            height: siteSettings.logo.height,
+            width: '100px',
+            height:'100px',
           }}
         >
           <Image
-            src={settings?.options?.logo?.original ?? siteSettings.logo.url}
+            src={
+              // settings?.options?.logo?.original ?? 
+              siteSettings.logo.url
+            }
             alt={settings?.options?.siteTitle ?? siteSettings.logo.alt}
             fill
-            sizes="(max-width: 768px) 100vw"
+            sizes="(max-width: 1200px) 100vw"
             className="object-contain"
             loading="eager"
           />
