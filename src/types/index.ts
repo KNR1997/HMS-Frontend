@@ -1858,7 +1858,7 @@ export interface ProductQueryOptions extends QueryOptions {
 }
 
 export interface UserQueryOptions extends QueryOptions {
-  name: string;
+  email: string;
   search?: string;
   is_active?: boolean;
 }
@@ -1918,6 +1918,7 @@ export interface RoomQueryOptions extends QueryOptions {
 
 export interface BookingQueryOptions extends QueryOptions {
   user: string;
+  customer_name: string;
   booking_number: string;
 }
 

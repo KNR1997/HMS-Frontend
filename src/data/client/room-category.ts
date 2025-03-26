@@ -5,6 +5,7 @@ import {
   RoomCategory,
   RoomCategoryInput,
   RoomCategoryPaginator,
+  RoomCategoryQueryOptions,
 } from '@/types';
 import { API_ENDPOINTS } from './api-endpoints';
 import { crudFactory } from './curd-factory';
@@ -17,11 +18,11 @@ export const roomCategoryClient = {
   //     language,
   //   });
   // },
-  paginated: ({ code, ...params }: Partial<CouponQueryOptions>) => {
+  paginated: ({ name, ...params }: Partial<RoomCategoryQueryOptions>) => {
     return HttpClient.get<RoomCategoryPaginator>(API_ENDPOINTS.ROOM_CATEGORIES, {
       searchJoin: 'and',
       ...params,
-      search: HttpClient.formatSearchParams({ code }),
+      search: HttpClient.formatSearchParams({ name }),
     });
   },
 };

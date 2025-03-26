@@ -78,6 +78,8 @@ interface SearchParamOptions {
   room_number: string;
   user: string;
   category: string;
+  customer_name: string;
+  email: string;
 }
 
 export class HttpClient {

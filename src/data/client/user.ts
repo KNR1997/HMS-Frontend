@@ -74,12 +74,12 @@ export const userClient = {
     return HttpClient.post<any>(API_ENDPOINTS.ADD_LICENSE_KEY_VERIFY, variables);
   },
 
-  fetchUsers: ({ name, ...params }: Partial<UserQueryOptions>) => {
+  fetchUsers: ({ email, ...params }: Partial<UserQueryOptions>) => {
     return HttpClient.get<UserPaginator>(API_ENDPOINTS.USERS, {
       searchJoin: 'and',
       with: 'wallet',
       ...params,
-      search: HttpClient.formatSearchParams({ name }),
+      search: HttpClient.formatSearchParams({ email }),
     });
   },
   fetchAdmins: ({ ...params }: Partial<UserQueryOptions>) => {

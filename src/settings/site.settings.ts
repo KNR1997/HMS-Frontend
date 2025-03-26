@@ -72,7 +72,6 @@ export const siteSettings = {
           },
         ],
       },
-
       hotel: {
         href: Routes.hotelDetails,
         label: 'Hotel Management',
@@ -85,40 +84,6 @@ export const siteSettings = {
             },
         ],
       },
-
-      // analytics: {
-      //   href: '',
-      //   label: 'Analytics',
-      //   icon: 'ShopIcon',
-      //   childMenu: [
-      //     {
-      //       href: '',
-      //       label: 'Shop',
-      //       icon: 'ShopIcon',
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'Product',
-      //       icon: 'ProductsIcon',
-      //     },
-      //     {
-      //       href: '',
-      //       label: 'Order',
-      //       icon: 'OrdersIcon',
-      //     },
-      //     // {
-      //     //   href: '',
-      //     //   label: 'Sale',
-      //     //   icon: 'ShopIcon',
-      //     // },
-      //     {
-      //       href: '',
-      //       label: 'User',
-      //       icon: 'UsersIcon',
-      //     },
-      //   ],
-      // },
-
       booking: {
         href: '',
         label: 'text-booking-management',
@@ -386,7 +351,7 @@ export const siteSettings = {
         childMenu: [
           {
             href: '',
-            label: 'text-all-users',
+            label: 'Users',
             icon: 'UsersIcon',
             childMenu: [
               {
@@ -394,16 +359,16 @@ export const siteSettings = {
                 label: 'text-all-users',
                 icon: 'UsersIcon',
               },
-              {
-                href: Routes.user.create,
-                label: 'text-pending-vendors',
-                icon: 'UsersIcon',
-              },
+              // {
+              //   href: Routes.user.create,
+              //   label: 'text-pending-vendors',
+              //   icon: 'UsersIcon',
+              // },
             ],
           },
           {
             href: Routes.adminList,
-            label: 'text-admin-list',
+            label: 'Admins',
             icon: 'AdminListIcon',
           },
           // {
